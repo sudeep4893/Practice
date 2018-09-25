@@ -1,0 +1,15 @@
+SQL PAGING IN ORACLE
+
+select records.* from
+(
+select rno, name, percentage, rownum r
+from student
+) records
+where records.r >=1 and records.r <=10;
+
+select records.* from
+(
+select rno, name, percentage, rownum r
+from student
+) records
+where records.r >=11 and records.r <=20;

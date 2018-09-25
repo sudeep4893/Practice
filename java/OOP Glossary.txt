@@ -1,0 +1,32 @@
+class
+------
+A class is a custom datatype formed
+by grouping related variables and methods.
+
+Conceptually a class represents some
+real life entity.
+The member variables of the class
+represent the characteristics of the
+entity.
+The member methods of the class
+represents the operations of the entity.
+
+object
+------
+An object is an instance of a class
+i.e. its datatype is a class.
+It is an entity that can store and
+process data.
+
+
+
+member method call
+-------------------
+A member method is accessible through
+object of the class.
+As a member method is called, system
+internally automatically
+1) Passes reference of the caller object as a hidden parameter to it.
+2) Receives reference of the caller object in formal parameter "this".
+3) Applies "this" as a caller object for other members used in the method.
+

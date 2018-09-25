@@ -1,0 +1,44 @@
+/*
+Network
+---------
+Network is a communication channel
+set between inter-connected computers
+or devices.
+
+Networking
+----------
+Networking is developing applications
+that run on network.
+
+A networked application is made up of 2 modules :
+* Server 
+* Client
+
+Role of Server Module
+--------------------
+1) Hosts the service logic.
+2) Open a port.
+3) On that port : wait, listen and accept client connections (preferably in a new thread)
+4) For a client connection (preferably in a new thread)
+   a) fetch input
+   b) process
+   c) output write
+   d) goto a) or e)
+   e) close the connection
+5) Go to step 3 or step 6
+6) Close the port
+
+Role of Client Module
+--------------------
+1) Request a connection
+2) Using the connection
+ a) send data
+ b) receive results
+ c) use the results
+ d) go to a) or 3)
+3) Close the connection
+
+=================================
+Port : A port is endpoint where sockets are established.
+Socket : A socket is bi-directional communication entity.
+*/

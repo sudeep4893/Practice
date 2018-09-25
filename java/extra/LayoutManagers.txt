@@ -1,0 +1,37 @@
+/*
+Layout Managers are used by GUI based java applications
+to size and position the GUI components.
+
+-------------------------------------------------------
+BorderLayout
+positions the components at 5 locations
+EAST, WEST, NORTH, SOUTH and CENTER
+
+components at EAST and WEST get default or
+desired width but their height is compulsorily
+the height of the container minus the sum of 
+heights of components at NORTH and SOUTH.
+
+components at NORTH and SOUTH get default or
+desired height but their widht is compulsorily
+the width of the container.
+
+component at CENTER gets remaining widht and
+height.
+
+-------------------------------------------------------
+FlowLayout 
+arranges the components rowise across the container.
+Every component can get their desired width and height.
+-------------------------------------------------------
+GridLayout 
+divides the component area in a grid of specific
+rows and cols.
+
+It arranges the components in the cells of the grid.
+Every component get width and height of the cell.
+
+
+
+*/
+

@@ -1,0 +1,30 @@
+GUI based applications
+---------------------------
+A GUI based application 
+
+1) Presents a graphical user interface to the 
+user. Generally a window with components in it. 
+2) Code of the application is associated with
+GUI components.
+3) As user of the application interacts with the
+GUI components, events occur.
+4) Code of the application is associated with
+events. And hence gets executed on events.
+
+
+Event Driven Programming
+-------------------------------
+Is an approach to code execution on event occurrence.
+
+
+Steps to implement Event Driven Programming
+----------------------------------------------------
+1) Define a container (window/frame/panel/applet/...)
+2) Define GUI components
+3) Add and position the GUI components in the container
+GUI components can be positioned in 2 ways
+  a) Automatically through layout managers //default
+  b) Manually by setting x, y, w, h of every component through setBounds(x, y, w, h) method
+4) Apply event listeners to the required GUI components
+5) Associate code with event procedures, so that it gets
+executed on event.

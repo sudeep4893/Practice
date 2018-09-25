@@ -1,0 +1,17 @@
+Setting environment variable : path
+
+Right click on my computer
+select properties
+select advanced
+select environment variables
+under system variables 
+select path : edit
+under value : go to end 
+give a semicolon
+and append C:\Program Files\Java\jdk\bin
+OK OK OK
+
+
+This allows DOS based compilation and 
+execution of java prgs from any working 
+directory

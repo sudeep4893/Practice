@@ -1,0 +1,73 @@
+Applet
+--------
+An applet is a java program that is
+embedded inside a webpage and is
+executed by the web-browser.
+
+How it works?
+-------------
+A web server hosts web pages with
+applets embbeded in some of them.
+
+Web client requests the web server
+for a web page that contains an applet.
+In response the web server transmits
+the web page and the embedded applet.
+
+The web browser receives both and
+* parses and renders the web page
+* loads the applet in memory.
+* executes the applet life cycle methods.
+
+Life Cycle Methods and Their Execution
+-----------------------------------
+Applet has 4 life cycle methods
+1) public void init()
+2) public void start()
+3) public void stop()
+4) public void destroy()
+
+init()
+------
+init() is the applets life cycle method
+that executes first and only once.
+It is used for all initializations, like a
+constructor.
+
+start()
+-------
+start() is the applets life cycle method
+that executes 
+* once after init().
+* once as the page is revisited.
+It is used for on visit activity.
+
+stop()
+------
+stop() is the applets life cycle method
+that executes 
+* once before destroy().
+* once as the page is left.
+
+It is used for on leave activity.
+
+destroy()
+---------
+destroy() is the applets life cycle method
+that executes last and only once when 
+the web browser decides to unload the
+applet from memory.
+
+It is used for resource clean up.
+
+
+How to code?
+-------------
+To make an applet define a public class 
+that extends java.applet.Applet
+
+As per the need override the applet's
+life cycle methods.
+
+Also define (override) a paint() method 
+for all applet rendering.

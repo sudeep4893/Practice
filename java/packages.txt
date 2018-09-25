@@ -1,0 +1,81 @@
+Packages
+----------
+A package is a collection of 
+* classes
+* interfaces
+* nested packages
+
+Purpose
+--------
+1) A package is used to define 
+   * Java Projects/Applications
+   * Java Libraries
+2) It keeps related classes/interfaces together,
+say in a compartment.
+3) It even protects from name conflicts.
+
+Creation
+---------
+To create a package simply create a 
+directory of the same name as of the
+package.
+
+Adding classes and interfaces into a package
+--------------------------------------- 
+1) Define the classes and interfaces with
+the package statement as their first statement.
+2) Place them in the package directory.
+
+Using a package
+---------------
+If the package represents an application
+then generally it is converted into an 
+"executable" jar file.
+
+If the package represents a java library
+then its "public" classes and interfaces 
+can be "imported" and used by other classes
+and interfaces, outside the package.
+
+About import
+--------------
+"import" statement provides access of
+public classes and interfaces of a package
+to the current class or interface.
+
+Example 
+-------
+import package.ClassName;
+import package.*;
+
+
+How does the system resolve "import" statements
+------------------------------------------
+To resolve an "import" statement system uses
+1) Environment Variable : CLASSPATH
+2) Compile time and Execution time Option : -classpath
+------------------------------------
+1) Setting the Environment Variable : CLASSPATH
+Right click on my computer
+Select Properties
+Select Advanced
+Select Environment Variables
+Under System Variables
+ Create/Edit : CLASSPATH
+ Variable Name : CLASSPATH
+ Variable Value : <existing>;.;locationOfPackage 
+OK to all Windows
+------------------------------------
+2) Compile time and Execution time Option : -classpath
+
+d:\java>javac -classpath "%classpath%";e: Learner.java
+d:\java>java -classpath "%classpath%";e: Learner 
+
+===================================
+public class
+
+A public class is a class that can be
+imported and used outside the package.
+
+It must be saved in a file that has the
+same name as of the class.

@@ -1,0 +1,107 @@
+Java's api used to connect to and to 
+interact with any database is defined 
+in package java.sql
+
+Database operations using Java
+----------------------------
+
+A) Connect to a database
+------------------------
+1) To load the database drivers in memory
+2) Make a connection
+
+B) To execute SQL
+-------------------
+Java categorizes SQL as
+1) Statements that do not return data.
+(create, alter, insert, update, commit, ...)
+
+2) Statements that return data.
+(select)
+
+All sql statements are formed as strings.
+For execution of sql java uses 
+Statement/PreparedStatement object.
+
+Statement : 
+A Statement object allows execution
+of any SQL statment.
+On execution, it transports the SQL to 
+the database, where the SQL is compiled 
+and then executed.
+
+Use a Statement object if the SQL to
+be executed changes across calls.
+
+PreparedStatement
+------------------
+A prepared statements binds to one SQL
+statement.
+On creation, it transports the SQL to the 
+database, get it compiled and internally 
+stores the compiled SQL.
+On execution, it transports a native SQL 
+which efficient for execution at database 
+tier.
+
+Use a PreparedStatement in case one
+object is to be dedicated to one SQL.
+
+For SQL statements that donot return data:
+use the method : executeUpdate()
+
+For SQL statements that return data:
+use the method : executeQuery()
+
+ResultSet
+----------
+A ResultSet object is a matrix like data
+structure that holds data fetched by
+execution of select SQL statement.
+
+ResultSet rs;
+  rs = stmt.executeQuery("select ...");
+
+(For 1 Statement/PreparedStatement object
+there can be only 1 ResultSet open at a time.)
+
+It has 2 virtual rows and 0-many data rows.
+The two virtual rows marks begining and
+end of the ResultSet rows.
+They are referred as "BeforeFirst" and
+"AfterLast".
+
+A row of the ResultSet can be identified
+by the poisition of a "row pointer".
+The "row pointer" is by default at the
+"BeforeFirst" row.
+It can be moved by functions like :
+next(), previous(), first(), last(), absolute(int), ...
+
+A ResultSet is by default static and forward
+only and hence 
+* doesnt reflect the updations made at database tier.
+* doesnt support scrolling.
+
+Columns of a ResultSet are either identified 
+by a name or by 1 based index.
+
+To fetch a cell value one must position
+the row pointer first and then use
+ResultSet's getXXX(colIndex) methods.
+
+
+ResultSetMetaData
+------------------
+ResultSetMetaData provides ResultSet's
+schema informatiom.
+Like : Number Of Columns, their datatypes,
+their names, table name,...
+
+ResultSetMetaData object can be obtained
+using ResultSet's "getMetaData()" method. 
+
+=======================================
+Database Driver : It is a module that
+ensures transfer of information between 
+application and database.

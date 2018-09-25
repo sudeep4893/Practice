@@ -1,0 +1,12 @@
+ACCESS
+driver = "sun.jdbc.odbc.JdbcOdbcDriver";
+connUrl = "jdbc:odbc:DSNName";
+Class.forName(driver);
+conn = DriverManager.getConnection(connUrl);
+
+ORACLE
+driver = "oracle.jdbc.OracleDriver";
+connUrl = "jdbc:oracle:thin:@//localhost:1521/xe";
+
+Class.forName(driver);
+conn = DriverManager.getConnection(connUrl, uid, pass);

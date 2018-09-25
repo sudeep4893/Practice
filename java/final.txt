@@ -1,0 +1,36 @@
+Java allows declaration of
+* variables
+* methods
+* classes
+as "final".
+
+final class
+----------
+A final class is a class that cannot be inherited.
+(see Fclass.java)
+
+final method
+------------
+A final method is a method that cannot be overridden.
+(see Fmethod.java)
+
+
+final variables
+-------------
+(see Fvariable.java)
+
+-- final local variable
+  * Must be initialized once either along with declaration or anywhere before first use.
+  * It can used ahead as a read only variable
+  * It cannot be reassigned.
+
+-- final formal parameter
+  * Is initialized by the actual parameter per call to the method
+  * It can used ahead as a read only variable
+  * It cannot be reassigned.
+
+-- final member variable
+  * It can be initialized once per object, either alongwith declaration or by the initalizer block or by the constructor. Not by all. Never by any method.
+  * It can used ahead as a read only variable
+  * It cannot be reassigned.
+
