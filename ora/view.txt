@@ -1,0 +1,225 @@
+View
+-----
+A view is a stored query (a SQL select statement).
+It is based on one to many tables.
+It has no data of its own, it reflects data of base tables.
+It acts like a table and hence is often called as a "virtual table".
+
+Syntax
+-------
+create view <viewName>
+as
+select statement ...
+[with read only]
+[with check option];
+=====================================
+Example 1
+----------
+create view clerks
+as
+select ename, ejob, dname 
+from 
+emp inner join dept
+on
+emp.eno = dept.dno
+where ejob = 'clerk';
+
+Hereafter 'clerks'  can be used like a table
+sql> select * from clerks;
+sql> desc clerks
+sql> select * from clerks where dname = 'sales';
+sql> ...
+
+HOW IT WORKS
+---------------
+As a sql statement is applied on a view
+system first fetchs the definition (base 
+select statement) of the view, executes 
+it and creates a result set.
+Next the current sql is applied on the
+result set.
+=====================================
+Classifications
+--------------
+A view may be classified as 
+a) Table-Join view
+b) Field view
+c) Row view
+d) Windowed view
+
+Table-Join view
+--------------
+is a view that fetches data from multiple
+tables generally using a join statement.
+
+Example2 : see Example 1
+
+b) Field view
+------------
+is a view that fetches limited fields (columns)
+but all records of a table.
+
+Example 3:
+create view BasicEmp
+as
+select eno, ename, ejob 
+from emp;
+
+c) Row view
+------------
+is a view that fetches limited rows (records)
+but all fields (columns) of a table.
+
+Example 4:
+create view Managers
+as
+select * from emp
+where ejob= 'manager';
+
+
+d) Windowed view
+----------------
+is a view that fetches limited fields (columns)
+and limited rows (records) from the base tables.
+
+Example 5: see Example1 
+=====================================
+Apart from defintionwise classification, a view
+may be 
+* Updatable view
+* Non updatable view
+
+An updatable view allows insert/update/delete
+operations on the base tables through the view.
+
+An non updatable view blocks insert/update/delete
+operations on the base tables through the view.
+
+A view becomes non updatable if its select statement
+* uses join
+* uses group by
+* uses nested queries
+* uses set operators
+* uses distinct
+* uses calculated fields
+* uses functions
+* doesnt reflect columns of base tables, 
+  constraints of which may block the 
+  insert/update/delete.
+
+If an insert/update ignores the virtual column
+(calculated field/function) of a view and 
+constraints of columns of base tables also 
+doesnt raise any error then the operation 
+becomes valid.
+
+Example 6
+----------
+ create view myemp
+ as
+ select eno, ename, esal + 100 esal
+ from emp;
+
+(esal + 100) is a calculated field and is
+aliased as esal.
+
+SQL> insert into myemp values (11, 'qwe', 888);
+RESULT : Error virtual col (esal) not allowed
+
+SQL> insert into myemp(eno, ename) values (11, 'qwe');
+RESULT : Success if other columns of emp that are not in view donot raise any constraint violation error
+
+SQL> update myemp set esal = esal + 1;
+RESULT : Error virtual col (esal) not allowed
+
+SQL> update myemp set ename = upper(ename);
+RESULT : Success if any constraint is not violated
+
+SQL> delete from myemp where eno = 12;
+RESULT : Success (record removed from base table emp)
+
+=====================================
+Read only view
+-------------
+Is a view that allows fetching of data only
+and doesnt support insert/update/delete
+operations on base table through the view.
+
+By default the view is not read only
+
+example
+--------
+sql> create view Managers
+as
+select * from emp
+where ejob= 'manager';
+
+sql> insert into Managers values (99, 'eee', 'manager', 8888, 2);
+RESULT : SUCCESS
+
+DROP THE VIEW
+------------------ 
+sql> drop view Managers;
+
+RECREATE THE VIEW AS READ ONLY
+-----------------------------------
+sql> create view Managers
+as
+select * from emp
+where ejob= 'manager'
+with read only;
+
+sql> insert into Managers values (100, 'fff', 'manager', 8888, 2);
+RESULT : ERROR
+
+sql> update Managers set esal = esal +1;
+RESULT : ERROR
+
+sql> delete from Managers;
+RESULT : ERROR
+
+=====================================
+with check option
+----------------
+
+A view "with check option" validates and then 
+supports insert/update operations on base table 
+through the view.
+
+example
+--------
+sql> create view Managers
+as
+select * from emp
+where ejob= 'manager';
+
+sql> insert into Managers values (88, 'eee', 'clerk', 4444, 2);
+RESULT : SUCCESS (we inserted a clerk in emp through the view managers)
+
+DROP THE VIEW
+------------------ 
+sql> drop view Managers;
+
+RECREATE THE VIEW WITH CHECK OPTION
+----------------------------------------
+sql> create view Managers
+as
+select * from emp
+where ejob= 'manager'
+with check option;
+
+sql> insert into Managers values (100, 'fff', 'clerk', 8888, 2);
+RESULT : ERROR
+
+sql> update Managers set ejob = 'clerk';
+RESULT : ERROR
+
+=====================================
+
+Advantages
+-----------
+1) Hide some rows/columns/both
+2) We can make it read only
+3) Reflect data from multiple tables
+
+=====================================

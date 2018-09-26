@@ -1,0 +1,44 @@
+Order by clause
+--------------
+Order by clause is used to order (sort) the
+records fetched using a select statement.
+(Doesnt sort table data).
+
+Ordering is columnwise and can be applied
+to multiple columns as well.
+
+Ordering is by default in ascending form.
+It can be changed to descending form by
+use of DESC keyword along with order by
+clause.
+For explicit specification of ascending sort
+the keyword in ASC.
+
+If use then Order by caluse must be the
+last clause of a select statement.
+
+examples
+---------
+TO FETCH ALL EMPLOYEES IN ORDER OF THEIR SALARIES
+sql> select * from emp order by esal;
+
+TO FETCH MANAGERS IN ORDER OF THEIR DESCENDING SALARIES
+sql> select * from emp 
+     where ejob = 'manager'
+     order by esal DESC;
+
+TO FETCH ALL EMPLOYEES IN ASCENDING ORDER OF JOB AND DESCENDING ORDER OF SALARIES
+sql> select * from emp
+     order by ejob ASC , esal DESC; 
+or
+sql> select * from emp
+     order by ejob , esal DESC; 
+
+TO FETCH ALL EMPLOYEES NAMEWISE
+sql> select * from emp order by ename;
+
+
+NOTE : Order by clause will arrange
+names with CAPITAL case letters first and
+then names with SMALL case letters 
+and finally names with NULL in ascending sort.

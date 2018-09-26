@@ -1,0 +1,25 @@
+GREATEST & LEAST
+These two functions return either the greatest or
+least from a list of values.
+
+Syntax
+GREATEST(value1,value2, …)
+LEAST(value1,value2, …)
+
+Arguments
+valuen Makes up list of values
+Examples
+
+SELECT GREATEST(10,20,50,40) …
+will return 50, whereas
+
+SELECT LEAST(10,20,50,40) …
+will return 10
+
+
+SQL> select least('qw', 'aaD', 'aaa', 'fghg') from dual;
+LEA
+---
+aaD
+
+(ASCII VALUEWISE)

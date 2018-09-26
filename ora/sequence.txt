@@ -1,0 +1,68 @@
+A Sequence is a sequential number generator.
+It can be used with any table that requires 
+its output.
+
+Syntax
+ create sequence <sequencename>
+  [increment by <val>] //default 1
+  [start with <val>] //default 1
+  [maxvalue <val>/NOMAXVALUE]
+  [minvalue <val>/NOMINVALUE]
+  [cycle/nocycle]
+  [cache <val>/ nocache]
+
+eg
+
+SQL> create sequence myseq
+    increment by 2
+    start with 20
+    maxvalue 100
+    nocycle
+    nocache;
+
+To fetch a new value from a sequence
+        sequence.nextval
+
+To fetch current value from a sequence
+        sequence.currval
+ 
+
+SQL> select myseq.nextval from dual;
+
+   NEXTVAL
+----------
+        20
+
+SQL> select myseq.currval from dual;
+
+   CURRVAL
+----------
+        20
+
+SQL> select myseq.nextval from dual;
+
+   NEXTVAL
+----------
+        22
+
+SQL> insert into emp values(myseq.nextval, 'vikas', 'manager', 7878);
+
+1 row created.
+vikas will have eno = 24
+
+--------------------------------------------
+SQL> create sequence seq1
+         start with 100
+         increment by -2
+         maxvalue 100
+         minvalue 1;
+
+SQL> select seq3.nextval from dual;
+   NEXTVAL
+----------
+       100
+
+SQL> select seq3.nextval from dual;
+   NEXTVAL
+----------
+        98

@@ -1,0 +1,53 @@
+To modify a records (rows/tuples) of a table
+use the "update" statement
+
+syntax
+-------
+update <tableName>
+set
+col1 = val1, col2 = val2, ... , colN = valN
+[clause];
+
+example 1 : to increment the salary of all employees by 1
+sql> update employee
+set
+esal = esal +1;
+
+Note that by default update statement affects
+all records of the table.
+To limit the records being modified by update
+statement, one must apply where clause to it.
+
+example 2 : to set the names of all peons to uppercase
+sql> update employee
+set
+ename = upper(ename)
+where ejob = 'peon';
+
+----------------------------------------------------
+
+To delete records (rows/tuples) of a table
+use the "delete" statement
+
+syntax
+-------
+delete from <tableName>
+[clause];
+
+example : to delete all records
+--------
+sql> delete from employee;
+
+example : to delete all managers
+--------
+sql> delete from employee
+where ejob = 'manager';
+
+
+NOTE : Entire row gets deleted, cannot delete
+limited columns. TO delete limited columns use
+update statement.
+
+NOTE : By default delete deletes all the records
+of the table.
+Hence used of where clause is recommended.

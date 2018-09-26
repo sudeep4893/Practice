@@ -1,0 +1,51 @@
+Index
+-------
+An index is used for faster data access from 
+a table.
+
+Oracle allows creation of 2 types of indexes
+
+Simple index : An index applied on single column
+Composite index : An index applied on multiple columns
+
+Further an index can be classified as a
+
+1) Unique Index
+   Doesnt allow duplicate data in the indexed column.
+2) Duplicate Index  (default)
+   Allows duplicate data in the indexed column.
+
+Simple Index
+-------------
+   create index <indexname>
+     on <tablename>(<colname>);
+
+Composite Index
+--------------
+   create index <indexname>
+     on <tablename>(<colname>, <colname>);
+   
+
+The above created indexes are Duplicate Indexes
+To create unique indexes:
+
+Unique Simple Index
+------------------
+   create unique index <indexname>
+     on <tablename>(<colname>)
+
+Composite Index
+----------------
+   create unique index <indexname>
+     on <tablename>(<colname>, <colname>)
+
+--------------------------------------
+When a user defines a primary key or a 
+unqiue key constraint, then the Oracle engine 
+automatically creates a unique index on the 
+primary key or the unique key column.
+
+---------------------------------------
+To drop an index
+---------------
+  drop index indexname;

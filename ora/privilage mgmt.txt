@@ -1,0 +1,47 @@
+Privilage Management
+
+Privilages define the rights that allow a user 
+to use some/all Oracle resources.
+
+Objects that are created by a user are owned 
+and controlled by that user. 
+If a user wishes to access any of the other 
+users objects then the owner of the object 
+will have to give permissions for such an access.
+This is called as Granting Privilages.
+
+Privilages once granted can be taken  back by 
+the owner of the object. 
+This is called as Revoking Privilages.
+
+Oracle provides grant and revoke statements 
+for privilage management.
+
+Syntax
+Grant <privilages>
+on <tablename>
+to <username>
+[with grant option]
+
+or 
+
+Grant all
+on <tablename>
+to <username>
+[with grant option]
+
+Possible privilages are
+alter, delete, insert, select, update, all.
+ 
+with grant option allows the user to inturn
+grant object privilages to other users.
+
+Revoke Syntax
+
+revoke <privilages>
+on <tablename>
+from <username>
+
+or
+revoke all on <tablename>
+from <username>

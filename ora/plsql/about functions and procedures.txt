@@ -1,0 +1,57 @@
+A stored procedure or a function is a named 
+PL/SQL  block of code.
+
+It is a logically grouped set of SQL/PLSQL 
+statements that perform a specific task.
+
+Syntax to create a procedure
+
+create or replace procedure <procedureName>( argument [IN|OUT|IN OUT] datatype, ...)
+<IS|AS>
+
+declarations
+
+BEGIN
+   plsql code
+
+EXCEPTION
+   exception handling code
+END;
+/
+
+
+Syntax to create a function
+
+create or replace function <functionName>( argument [IN|OUT|IN OUT] datatype, ...)
+return datatype
+
+<IS|AS>
+
+declarations
+
+BEGIN
+   plsql code
+EXCEPTION
+   exception handling code
+END;
+/
+
+Observe the use of IN or OUT or IN OUT
+qualifiers along with the arguments.
+
+The IN qualifier is used for the arguments 
+that must be read only for the called function/procedure.
+The values of IN arguments must be specified 
+while calling the function/procedure.
+
+The OUT qualifier is used for the arguments 
+that must be writable for the called function/procedure.
+Through argument using an OUT qualifier the 
+called function/procedure passes a value back 
+to the caller.
+
+The INOUT qualifier signifies that the 
+argument is characteristic of IN and OUT both.
+
+IF no qualifier is specified then the default 
+qualifier is IN.

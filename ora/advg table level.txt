@@ -1,0 +1,53 @@
+table level constraints allows definition of composite keys
+
+Example  1
+-------------
+create table mytab
+(
+ a number,
+ b varchar(10),
+ c varchar(10),
+ primary key(a, b)
+);
+
+Analyze the following SQL statements
+sql> insert into mytab values(1, 'aaa', 'qqq');
+Result : SUCCESS
+
+sql> insert into mytab values(1, 'bbb', 'qqq');
+Result : SUCCESS
+
+sql> insert into mytab values(2, 'bbb', 'qqq');
+Result : SUCCESS
+
+sql> insert into mytab values(2, 'bbb', 'qqq');
+Result : ERROR  Primary key col values must be UNIQUE across the records
+
+sql> insert into mytab (b,c) values('ccc', 'qqq');
+Result : ERROR  Primary key col values must not be NULL in value
+
+Example  2
+-------------
+create table mytab
+(
+ a number CHECK (a > b),
+ b number,
+ c varchar(10)
+);
+RESULT : ERROR (col level check constraint cannot reference to multiple columns)
+
+create table mytab
+(
+ a number ,
+ b number,
+ c varchar(10),
+CHECK (a > b)
+);
+RESULT : SUCCESS (table level check constraint can reference to multiple columns)
+
+sql> insert into mytab values(10, 1, 'qqq');
+SUCCESS
+sql> insert into mytab values(10, 5, 'qqq');
+SUCCESS
+sql> insert into mytab values(10, 15, 'qqq');
+ERROR : CHECK constraint violated (val of col a is not greater than val of col b)

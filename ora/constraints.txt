@@ -1,0 +1,378 @@
+Constraints : Constraints are validation rules
+applied when records are added/modified/deleted
+from table.
+
+Constraints can be classified as
+1) Column level Constraints
+2) Table level Constraints
+
+This classification is due to different
+styles of constraint definition and has 
+no technical difference wrt the constraint 
+validation.
+
+Column level Constraints are defined along
+with the column defintion.
+
+Example
+create table ColLvl
+(
+ NameCol1 TypeCol1 ConstaintCol1, 
+ NameCol2 TypeCol2 ConstaintCol2, 
+ ...
+);
+
+Table level Constraints are defined after 
+defining all the columns.
+
+Example
+create table TabLvl
+(
+ NameCol1 TypeCol1 , 
+ NameCol2 TypeCol2 , 
+ ...
+ ConstaintCol1, ConstaintCol2, ...
+);
+
+SQL supports follow constaints
+1) NOT NULL
+2) UNIQUE
+3) PRIMARY KEY
+4) CHECK
+5) FOREIGN KEY (REFERENTIAL INTEGRITY CONSTRAINT) 
+-------------------------------------------------------------------------
+1) NOT NULL
+This constraint checks of presence of data
+for the column when a record is added/modified.
+If not found constraint violation error gets raised.
+
+Example 
+---------
+a) col level constraint defn
+create table MyTab
+(
+ A number NOT NULL,
+ B varchar(10) 
+);
+
+b) NOT NULL constraint cannot be set using table level constraint
+
+Note that col A of table MyTab has 
+NOT NULL constraint set.
+
+Analyze following SQL statements
+
+sql> insert into MyTab values (1, 'qqq');
+Result : SUCCESS (data provided for both the cols)
+
+sql> insert into MyTab (A) values (2);
+Result : SUCCESS (data provided for col A )
+
+sql> insert into MyTab (B) values ('www');
+Result :  ERROR (data provided for col B only, hence val of col A will be NULL hence it will be a "NOT NULL" constraint violation)
+
+sql> update MyTab set A = 10 where B = 'qqq';
+Result :  SUCCESS (no constraint violation)
+
+sql> update MyTab set A = NULL where B = 'qqq';
+Result :  ERROR (col with NOT NULL constraint cannot be updated to NULL value)
+-------------------------------------------------------------------------
+2) UNIQUE
+This constraint checks of uniqueness of data
+for the column across all the records of the
+table.
+It is applied when record is added/modified.
+If repeatation of data is found constraint 
+violation error gets raised.
+
+Note that UNIQUE constraint is nuetral to NULL value.
+
+Example
+---------
+a) col level constraint defn
+create table MyTab
+(
+ A number UNIQUE,
+ B varchar(10) 
+);
+
+b) table level constraint defn
+create table MyTab
+(
+ A number ,
+ B varchar(10) ,
+ UNIQUE (A)
+);
+
+Note that col A of table MyTab has 
+UNIQUE constraint set.
+
+Analyze following SQL statements
+
+sql> insert into MyTab values (1, 'qqq');
+Result : SUCCESS (data provided for both the cols and val of col A is unique)
+
+sql> insert into MyTab (A) values (2);
+Result : SUCCESS (data provided for col A is unique across the records)
+
+sql> insert into MyTab (B) values ('www');
+Result :  SUCCESS (data provided for col B only, and val of col A will be NULL, Recall that cols with UNIQUE constraint are nuetral to NULL)
+
+sql> insert into MyTab (B) values ('eee');
+Result :  SUCCESS (data provided for col B only, and val of col A will be NULL, Recall that cols with UNIQUE constraint are nuetral to NULL)
+
+sql> insert into MyTab  values (2, 'rrr');
+Result :  ERROR (data provided for col A is not unique and hence a cause of constaint violation)
+
+sql> update MyTab set A = 3 where B = 'www';
+Result :  SUCCESS (no constraint violation)
+
+sql> update MyTab set A = 3 where B = 'eee';
+Result :  ERROR (data provided for col A is not unique and hence a cause of constaint violation)
+
+-------------------------------------------------------------------------
+3) PRIMARY KEY
+This constraint checks of uniqueness and
+presence of data for the column across
+all the records of the table.
+It is applied when a record is added/modified.
+If repeatation of data is found or no data found 
+constraint violation error gets raised.
+
+Note that only one column can be set with
+a PRIMARY KEY constraint for a table.
+Its purpose is unique representation of records
+of table.
+
+Example
+---------
+a) col level constraint defn
+create table MyTab
+(
+ A number PRIMARY KEY,
+ B varchar(10) 
+);
+
+b) table level constraint defn
+create table MyTab
+(
+ A number ,
+ B varchar(10),
+ PRIMARY KEY(A)
+);
+
+Note that col A of table MyTab has 
+PRIMARY KEY constraint set.
+
+Analyze following SQL statements
+
+sql> insert into MyTab values (1, 'qqq');
+Result : SUCCESS (data provided for both the cols and val of col A is unique)
+
+sql> insert into MyTab (A) values (2);
+Result : SUCCESS (data provided for col A and is unique across the records)
+
+sql> insert into MyTab (B) values ('www');
+Result :  ERROR (data provided for col B only, and val of col A will be NULL, Recall that column with PRIMARY KEY constraint does not support insertion of NULL)
+
+sql> insert into MyTab  values (2, 'rrr');
+Result :  ERROR (data provided for col A is not unique and hence a cause of constaint violation)
+
+sql> update MyTab set A = 10 where B = 'qqq';
+Result :  SUCCESS (no constraint violation)
+
+sql> update MyTab set A = 10 where B is NULL;
+Result :  ERROR (data provided for col A is not unique and hence a cause of constaint violation)
+
+sql> update MyTab set A = NULL where B is 'qqq';
+Result :  ERROR (NULL value provided for col A  is illegal, Recall that column with PRIMARY KEY constraint does not support updation to NULL)
+
+-------------------------------------------------------------------------
+4) CHECK
+This constraint compares the column data
+against some preset data when a record is 
+added/modified.
+
+The comparison results in a boolean.
+When true insert/update succeeds.
+When false then constraint violation takes
+place and insert/update fails.
+
+Example
+---------
+
+a) col level constraint defn
+create table MyTab
+(
+ A number CHECK (A > 0 and A < 21),
+ B varchar(10) CHECK ( B = upper(B)),
+ C varchar(10) CHECK ( C in ('qqq', 'www'))
+);
+
+b) table level constraint defn
+create table MyTab
+(
+ A number ,
+ B varchar(10) ,
+ C varchar(10) ,
+ CHECK (A > 0 and A < 21) ,
+ CHECK ( B = upper(B)) ,
+ CHECK ( C in ('qqq', 'www'))
+);
+
+Analyze following SQL statements
+
+sql> insert into MyTab values (1, 'ABC', 'qqq');
+Result : SUCCESS (no check constraint viloated)
+
+sql> insert into MyTab values (-1, 'ABC', 'qqq');
+Result : ERROR (check constraint for col A is viloated, the data in not in range 1-20)
+
+sql> insert into MyTab values (2, 'pqr', 'www');
+Result : ERROR (check constraint for col B is viloated, the data is not in upper case)
+
+sql> insert into MyTab values (3, 'PQR', 'eee');
+Result : ERROR (check constraint for col C is viloated, the data is not in 'qqq' or 'www')
+
+sql> update MyTab set A = 30 where A = 1;
+Result : ERROR (check constraint for col A is viloated, the data is not in range 1-20)
+
+sql> insert into mytab(b, c) values('MNO', 'qqq');
+RESULT : SUCCESS (check constraints is netrual to NULL)
+
+-------------------------------------------------------------------------
+5) FOREIGN KEY (REFERENTIAL INTEGRITY CONSTRAINT)
+
+Normalization techniques split a complex 
+dataset into multiple tables.
+But the tables need to be related with one
+another so that collective information is
+accessible.
+So they are linked using foreign keys.
+
+A Foreign key is a column of a table that 
+uniquely represents records of another table.
+Generally the primary key of a parent table
+acts as a foreign key for the child table.
+
+defn
+-------
+a) col level constraint defn
+create table parent
+(
+ a number primary key,
+ b varchar(10)
+);
+create table child
+(
+ m number primary key,
+ n varchar(10),
+ a number references parent(a)
+);
+
+b) table level constraint defn
+create table parent
+(
+ a number ,
+ b varchar(10),
+ primary key(a)
+);
+
+create table child
+(
+ m number ,
+ n varchar(10),
+ a number ,
+ primary key (m),
+ foreign key(a) references parent(a)
+);
+
+
+Observe following sql statements
+sql> insert into parent values (1, 'qqq'); 
+sql> insert into parent values (2, 'www');
+
+sql> insert into child values (1, 'abc', 1);
+sql> insert into child values (2, 'xyz', 1);
+sql> insert into child values (3, 'pqr', 2);
+sql> insert into child (m,n) values (4, 'lmn');
+
+RESULT : ALL SUCCESS
+NOTE : Foreign key col value may be null.
+
+Analyze following SQL statements
+sql> insert into child values (5, 'ddd', 3);
+RESULT : ERROR (referential integrity violated -- PARENT KEY NOT FOUND, Foreign key val must be present in the master table or be null)
+
+sql> delete from parent where A = 1;
+RESULT : ERROR (referential integrity violated -- CHILD RECORD FOUND, Primary key record of master table being referenced in child table cannot be deleted)
+
+sql> update parent set A = 11 where A = 1;
+RESULT : ERROR (referential integrity violated -- CHILD RECORD FOUND, Primary key record of master table being referenced in child table cannot be updated)
+
+Conclusion : Referential integrity ensures
+a relation between records of 2 tables.
+
+It doesnt allows insertion of records in
+child table with a foreign key value that is
+not available in master table.
+
+It doesnt allows updation/deletion of records 
+of master table which are being referenced by
+(through foreign key) the records of child table.
+(Refer ON DELETE CASCADE also)
+-------------------------------------------
+
+Two tables with referential integrity can
+have ON DELETE CASCADE facility.
+
+EXAMPLE
+-----------
+a) col level constraint defn
+create table parent1
+(
+ a number primary key,
+ b varchar(10)
+);
+
+create table child1
+(
+ m number primary key,
+ n varchar(10),
+ a number references parent1(a) ON DELETE CASCADE
+);
+
+b) table level constraint defn
+create table parent1
+(
+ a number ,
+ b varchar(10),
+ primary key(a)
+);
+
+create table child1
+(
+ m number,
+ n varchar(10),
+ a number,
+ primary key(m),
+ foreign key(a) references parent1(a) ON DELETE CASCADE
+);
+
+
+observe following sql statements
+
+sql> insert into parent1
+     select * from parent;
+sql> insert into child1
+     select * from child;
+
+Analyze following SQL statements
+sql> delete from parent1 where A = 1;
+RESULT : SUCCESS (referential integrity was defined with ON DELETE CASCADE option set. Due to this deletion of a record from master table also results in auto deletion of referenced records of child table)
+
+sql> update parent1 set A = 55 where A=2;
+RESULT : ERROR (referential integrity violated -- CHILD RECORD FOUND, Primary key record of master table being referenced in child table cannot be updated)
+
+If master table has to be droped then
+first child table has to be dropped.

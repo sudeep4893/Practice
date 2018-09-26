@@ -1,0 +1,29 @@
+The SOUNDEX() function converts a string 
+into a special four-character code representing 
+the way the string sounds rather than how it 
+is spelled. 
+
+syntax:
+-------
+SOUNDEX(name_to_be_converted_to_code);
+
+The first character in the code is always the 
+first character of the original string.
+Following that is a three digit number 
+representing how the word sounds based 
+on the SOUNDEX() guidelines. 
+
+Examples
+
+sql> select soundex('computer') , soundex('computor') from dual;
+
+sql> select * from emp where 
+     soundex(ejob) = soundex('clark');
+
+sql> select * from emp where 
+     soundex(ejob) = soundex('pion');
+
+
+Note 
+------
+MS Access doesn’t support the SOUNDEX() function.

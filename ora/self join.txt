@@ -1,0 +1,40 @@
+Self Joins
+A self join allows connecting a table with itself.
+A self join may be a cross / an inner / an outer join.
+
+Generally a self join is used in case we want to 
+perform a match on rows of same table.
+
+eg fetch employees having same name.
+
+we need to load the same table in memory 
+twice , so that we can  compare their rows.
+
+  X (alias)		  Y (alias)
+1 aaa   ...		1 aaa   ...
+2 bbb   ...		2 bbb   ...
+3 ccc   ...		3 ccc   ...   
+4 ddd   ...		4 ddd   ...
+5 eee   ...		5 eee   ...
+6 aaa   ...		6 aaa   ...
+7 ggg   ...		7 ggg   ...
+
+ To view emps with same name
+
+select distinct X.eno, X.ename, X.ejob
+from 
+emp X inner join emp Y
+on emp.ename = emp.ename
+and
+X.eno <> Y.eno;
+
+
+To fetch depts of same city
+
+select distinct X.dname, X.dloc
+from 
+dept X inner join dept Y
+on X.dloc = Y.dloc
+and
+X.dno <> Y.dno;
+

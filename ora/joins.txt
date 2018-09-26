@@ -1,0 +1,197 @@
+Introduction
+--------------
+Normalization process splits the complex
+datasets and form multiple smaller managable
+datasets (tables).
+
+So due to nomralization the information of 
+a system gets splitted across multiple tables.
+
+But real life reports/processes require data
+from multiple tables.
+
+When data is to be fetched from multiple
+tables then we apply SQL Joins.
+
+Definition
+----------
+SQL Joins are mechanism to combine data
+of multiple tables and to form one result set.
+
+SQL Joins are of 3 types
+1) Cross Join
+2) Inner Join
+3) Outer Join
+  a) LEFT Outer join
+  b) RIGHT Outer join
+  c) FULL Outer join
+
+=========================================
+Cross Join : Is used to fetch data from multiple
+tables. It simply appends all rows of a table
+to every row of another table.
+The result set is of size = multiplication of 
+row count of the two tables.
+
+The result set is meaninless unless it is filtered
+using some condition.
+
+It is also called as Cartesian Join or Product Join.
+
+There are 2 ways to apply cross joins
+
+syntax 1
+----------
+select field1T1, field2T1, field1T2
+from 
+T1 cross join T2;
+
+
+example1
+---------
+sql> select eno, ename, dname
+     from
+     emp cross join dept;
+
+
+syntax 2
+----------
+select field1T1, field2T1, field1T2
+from T1 , T2;
+
+example2
+---------
+sql> select eno, ename, dname
+     from emp, dept;
+
+=========================================
+Inner Join : Is used to fetch data from multiple
+tables. It uses a Join Column (match criteria)
+to append matching rows of two tables.
+
+The result set is of size = numbers of 
+rows that satisfy the match criteria.
+
+To apply inner join
+
+syntax
+-------
+select field1T1, field2T1, field1T2
+from 
+T1 inner join T2
+on
+JoinColT1 = JoinColT2;
+
+
+example
+---------
+sql> select eno, ename, dname
+     from
+     emp inner join dept
+     on emp.dno = dept.dno;
+
+=========================================
+Outer Join : Is used to fetch data from multiple
+tables. It uses a Join Column (match criteria)
+to append matching rows of two tables.
+
+It is of 3 types
+
+a) Left Outer Join
+-----------------
+It is an outer join that produces result set of 
+size = numbers of rows that satisfy the match criteria
+plus the non matching rows of table on left 
+hand side of join statement.
+
+To apply left outer join
+
+syntax
+-------
+select field1T1, field2T1, field1T2
+from 
+T1 LEFT outer join T2
+on
+JoinColT1 = JoinColT2;
+
+
+example
+---------
+sql> select eno, ename, dname
+     from
+     emp LEFT outer join dept
+     on emp.dno = dept.dno;
+
+b) Right Outer Join
+-----------------
+It is an outer join that produces result set of 
+size = numbers of rows that satisfy the match criteria
+plus the non matching rows of table on right
+hand side of join statement.
+
+To apply right outer join
+
+syntax
+-------
+select field1T1, field2T1, field1T2
+from 
+T1 RIGHT outer join T2
+on
+JoinColT1 = JoinColT2;
+
+
+example
+---------
+sql> select eno, ename, dname
+     from
+     emp RIGHT outer join dept
+     on emp.dno = dept.dno;
+
+c) Full Outer Join
+-----------------
+It is an outer join that produces result set of 
+size = numbers of rows that satisfy the match criteria
+plus the non matching rows of table on both
+sides of join statement.
+
+To apply right outer join
+
+syntax
+-------
+select field1T1, field2T1, field1T2
+from 
+T1 FULL outer join T2
+on
+JoinColT1 = JoinColT2;
+
+
+example
+---------
+sql> select eno, ename, dname
+     from
+     emp FULL outer join dept
+     on emp.dno = dept.dno;
+
+============================================
+
+Display eno, ename, esal, dname for all employees.
+
+sql> select eno, ename, esal, dname 
+     from
+     emp LEFT outer join dept 
+     on
+     emp.dno = dept.dno;
+
+Display ename and dname of employees
+working in pune.
+
+sql> select ename, dname from
+     emp inner join dept
+     on 
+     emp.dno = dept.dno
+     where dloc = 'pune';
+
+(NOTE THE POSSIBILITY OF USE OF
+COLS OFANY TABLE, IN WHERE CLAUSE)
+
+   

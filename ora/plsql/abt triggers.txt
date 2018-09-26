@@ -1,0 +1,129 @@
+A trigger defines an action that DBMS Engine
+should perform when some DML event occurs 
+on database tables.
+A Trigger contains plsql statements.
+
+Syntax
+
+create or replace trigger <trigger name>
+<[before | after ]>
+< dml event > 
+on <tablename>
+[for each row]
+
+declare
+   ....
+begin
+  ....
+end;
+/
+
+
+Types of Triggers
+
+Row level Triggers
+Row level trigger's code executes once per row 
+affected by the DML statement.
+
+Statement Level Triggers
+Statement Level trigger's code executes once 
+for the DML statement.
+
+
+Row or Statement level Triggers may be set to 
+occur before or after the execution of DML 
+statement.
+
+Tip : Triggers may be used to enforce some 
+business rules.
+
+Referencing variables
+:old and :new are available for use in Row Level Triggers.
+
+:old and :new are system defined variables of
+datatype %ROWTYPE and they hold the data of
+the row (record) being processed by the DML.
+
+Say an update is done.
+So some column value will change 
+in such a case
+:old.colname represents the val of
+the column before update (original val).
+And
+:new.colname represents the val of
+the column after update (new val to be applied).
+
+Trigger on Update of limited Columns
+--------------------------------
+If the trigger is registered to execute on 
+update event then by default it applies to all 
+columns of the table.
+But it is possible to execute the trigger on
+update of a limited set of columns.
+(see limitUpdate.sql)
+
+
+TRIGGER RESTRICTION
+-----------------------
+Execution of a "for each row" trigger may be 
+restricted using "WHEN" clause.
+
+The NEW and OLD keywords, when specified in 
+the WHEN clause, are not considered as bind 
+variables, so are not preceded by a colon (:). 
+
+However, you must precede NEW and OLD 
+with a colon in all references other than the 
+WHEN clause.
+
+(See SalaryLimit.sql)
+
+ENABLE/DISABLE Triggers
+------------------------
+As a trigger is created, it is enabled (active)
+by default.
+It is possible to enable/disable a trigger using
+"alter trigger".
+
+SYNTAX
+sql> alter trigger <trigger name> <ENABLE / DISABLE> ;
+    
+EXAMPLES
+sql> alter trigger DontDecrementSal DISABLE ;
+sql> alter trigger DontDecrementSal ENABLE;
+
+
+DROP A TRIGGER
+-----------------
+A trigger may be dropped by using the drop command.
+
+SYNTAX
+sql> drop trigger <triggerName>;
+
+EXAMPLE
+sql> drop trigger limitUpdate;
+
+
+USER_TRIGGERS
+----------------
+USER_TRIGGERS table stores details of
+all triggers defined by the current user.
+
+USAGE
+--------
+sql> desc USER_TRIGGERS;
+sql> select TRIGGER_NAME, TABLE_NAME 
+     from USER_TRIGGERS;
+
+
+To prevent execution of DML
+---------------------------
+raise_application_error is used to
+generate a runtime error by which
+the current DML execution stops.
+
+syntax
+raise_application_error(errno, errmsg);
+
+errno should be a whole number less than -20000
+errmsg is a custom string

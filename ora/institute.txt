@@ -1,0 +1,61 @@
+Institute = {classroom, students, teacher, staff, courses}
+
+students = { sid, sname, saddress, sphone, course }
+teacher = { tid, tname, taddress, tphone, course }
+staff = { sid, sname, saddress, sphone, ssal, sjob}
+course = {cid, cname, csyllabus, cfee, cduration }
+
+Student
+--------
+sid, sname, saddress, sphone
+1    aaa       pune      123  
+
+Course
+-------
+cid, cname, csyllabus, cfee, cduration 
+1     C        ....      111    2
+2     C++     ....      121    3
+
+We need to relate the Student and the Course
+table to fetch collective information
+It can be understood that 
+1 Student does Many Courses
+1 Course can be done by Many Students
+So a Many to Many relationship exists between the two tables.
+
+StudentCourse
+--------------
+scid    sid   cid
+1        1     1
+2        1     3 
+3        2     5
+4        3     5
+
+
+teacher 
+--------
+tid, tname, taddress, tphone
+1     a         qqq     444       
+2     b         www    555
+
+We need to relate the teacher and the Course
+table to fetch collective information
+It can be understood that 
+1 teacher teaches Many Courses
+1 Course can be taught by Many teachers
+So a Many to Many relationship exists between the two tables.
+
+TeacherCourse
+--------------
+tcid    tid   cid
+1        1     1
+2        1     3 
+3        2     3
+
+
+staff
+-----
+sid, sname, saddress, sphone, ssal, sjob
+1     x        r           111   123   manager
+2     z        y           121   103   peon
+3     c        g           112   113   clerk

@@ -1,0 +1,218 @@
+SQL : Structured Query Language
+It is a standard language to work with DBMS/RDBMS.
+
+It provide commands for 
+1) Data Definition
+2) Data Manipulation
+3) Data Control
+4) Data Access (Query)
+
+Known that an RDBMS stores its data in a
+relation (table), So to create a table we have
+"create" statement.
+
+Syntax 1
+---------
+sql> create table <tableName>
+     (
+        <col1Name> <col1Type> [constraints],  
+        <col2Name> <col2Type> [constraints],  
+        ... 
+        <colnName> <colnType> [constraints],  
+        [table level constraints]
+     );
+
+example
+SQL> create table employee
+       (
+	eno number,
+	ename varchar(10),
+	esal number
+       );
+
+Syntax 2
+----------
+Creates a table from a table.
+
+sql> create table <NewTableName>
+as
+select <colList or * or ...> 
+from <SourceTableName>
+[clause];
+
+The new table gets structure (defn) and data
+from the source table.
+
+example
+--------
+TO GET STRUCTURE AND ALL RECORDS
+sql> create table employee
+as
+select * from emp;
+
+
+TO GET STRUCTURE AND LIMITED RECORDS
+sql> create table managers
+as
+select * from emp
+where ejob = 'manager';
+
+TO COPY STRUCTURE ONLY AND NO RECORDS
+sql> create table emp1
+as
+select * from emp
+where eno = -1;
+(here we apply a criteria that filters all records)
+
+==============================================
+
+To create a record (row/tuple) for a table
+use the "insert" statement
+
+syntax 1
+---------
+sql> insert into <tableName>
+     values
+     (valCol1, valCol2, ...valColn); 
+
+example
+sql> insert into employee
+     values
+     (1, 'aaa', 3456); 
+
+The above command requires specification of
+data for all columns and in correct sequence.
+
+
+syntax 2
+---------
+sql> insert into <tableName>
+     (col1, col2)
+     values
+     (valCol1, valCol2); 
+
+example
+sql> insert into employee
+     (eno, ename)
+     values
+     (2, 'bbb'); 
+or 
+
+sql> insert into employee
+     (ename, eno)
+     values
+     ('ccc', 3); 
+
+The above command allows specification of
+data for limited columns and in desired sequence.
+
+Due to insertion of data in limited columns
+the row is created with "NULL" values for
+the missing columns.
+Hence there is a chance of failure of insert
+if the missing column has "NOT NULL" constraint
+set.
+
+syntax 3
+---------
+sql> insert into <targetTableName>
+     [(col1, col2)]
+     select < * or colList> from <sourceTableName>
+     [clause];
+    
+
+example
+sql> insert into employee1
+     select * from employee;
+
+sql> insert into employee2
+     (eno, ename)
+     select eno, ename from employee;
+
+Reasons for failure of above like insert statements
+1) Duplicate Data
+2) Missing Data
+3) Incompatible Data
+4) Oversized Data
+5) Mismatched number columns in source and target
+
+==============================================
+To fetch records (row/tuple) from a table
+use the "select" statement
+
+syntax
+-------
+sql> select <colList or * or literal or operator or function>
+from <tableName>
+[clauses];
+
+example 1 : fetch all data
+sql> select * from employee;	
+
+example 2 : fetch eno and ename for all rows
+sql> select eno, ename from employee;	
+
+example 3 : fetch ename and eno for all rows
+sql> select ename, eno from employee;	
+
+example 4 : display ename and esal in a statement form
+"salaray of <ename> is <esal>"
+sql> select 'salary of ', ename, ' is ', esal from employee;
+
+example 5 : display ename in uppercase
+sql> select upper(ename) from employee;
+
+example 6 : display ename and esal incremented by 100
+sql> select ename, esal + 100 from employee;
+
+NOTE : By default select statement fetches
+data of all the rows (records) of the table.
+To filter the rows fetched using select we
+must apply "where" clause.
+
+syntax
+---------
+.... where 
+col1 cmprOp val1
+   AND/OR
+col2 cmprOp val2
+...
+
+example 1 : show all managers
+sql> select * from employee
+where ejob = 'manager';
+
+example 2 : show employees earning sal > 3000 and sal < 6000
+sql> select * from employee
+where esal > 3000 and esal < 6000;
+
+example 3 : show all peons and only those clerks who earn more than 4000
+sql> select * from employee
+where
+ejob = 'peon'
+or  
+ejob = 'clerk' 
+and  
+esal > 4000;
+
+or
+
+sql> select * from employee
+where
+ejob = 'peon' or  
+( ejob = 'clerk' and esal > 4000 );
+
+Both the solutions work as priority of logical AND
+is higher than that of logic OR
+
+example 4 : to show employees with no job
+sql> select * from employee
+where ejob is NULL;
+
+(Note that = doesnot support comparison of
+colValues with NULL and it has to be done 
+using the "is" operator).
+
+example 5 : to show employees with job
+sql> select * from employee
+where ejob is not NULL;

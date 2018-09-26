@@ -1,0 +1,86 @@
+group by
+---------
+group by clause of select statement is used 
+to form identical sub sets of data fetched 
+by the select statement.
+
+If output of a select statement fetching 
+multiple columns is to be grouped then
+actually the grouping is to be performed 
+on records and not on fields.
+
+Hence it is complusory to use the same set 
+of columns in the group by caluse as used in
+the select statement.
+
+Note that use of * in select statement that
+applies group by caluse is invalid.
+
+Use of aggregate functions in select statements
+that apply group by clause, returns more meaningfull
+results.
+
+examples
+----------
+1) to fetch records jobwise 
+sql> select ejob from emp
+     group by ejob;
+
+2) to fetch jobwise records and their count
+sql> select ejob , count(*) from emp
+     group by ejob;
+
+3) to fetch records and count of records
+   jobwise deptnamewise.
+
+sql> select ejob, dname, count(*)
+     from
+     emp inner join dept
+     on emp.dno = dept.dno
+     group by ejob, dname;
+
+4) show max and min salary jobwise
+sql> select ejob, max(esal), min(esal)
+     from emp 
+     group by ejob;
+
+5) show average salary departmentwise
+
+sql> select dname, avg(esal)
+     from 
+     dept inner join emp
+     on 
+     dept.dno = emp.dno
+     group by dname;
+
+
+having statement
+----------------
+As results of records fetched by a select 
+statement are filtered using "where" 
+similarly results of subsets formed by 
+"group by" are filtered using "having statement".
+
+examples
+--------
+6) show max and min salary for clerks and peons
+sql> select ejob, max(esal), min(esal)
+     from emp 
+     group by ejob
+     having ejob in('peon', 'clerk');
+ 
+
+7) to fetch details of employees who are 
+   max jobwise.
+   
+select * from emp
+where ejob =
+(
+  select ejob from emp
+  group by ejob
+  having count(*) =
+  (
+    select max(count(*)) from emp
+    group by ejob
+  )
+);

@@ -1,0 +1,44 @@
+Transactions
+
+A set of logically related dml statements 
+performing a series of operations on Oracle 
+tables forms a Transaction.
+
+The requested operations are done as demanded
+but oracle makes the  changes permanent only when
+commit statement is issued.
+
+On the otherside if a Rollback  statement is 
+issued then Oracle undo's all the dml operations
+until last commit.
+
+A transaction begins with the  first dml statement
+after a commit or connection made to oracle engine.
+
+A transaction can be completed by issuing  commit.
+And can be undone by issuing  rollback.
+
+
+Savepoint
+A savepoint is a mark for current point  within 
+a transaction.
+
+To create a savepoint
+   Savepoint <name>;
+
+Rollback can be fired with or without a savepoint.
+
+sql> rollback;
+A rollback without any savepoint undo's the 
+entire transaction.
+
+sql> rollback to savepoint <savepointname>;
+
+A rollback with a savepoint, undo's the transaction
+upto the savepoint mark.
+
+As a rollback (without savepoint) or a commit is 
+fired all the established savepoints are cleared.
+
+A proper combination of commit, rollback and 
+savepoints allow controlling the state of a tables.

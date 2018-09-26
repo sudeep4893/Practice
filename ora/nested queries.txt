@@ -1,0 +1,348 @@
+Nested Queries
+--------------
+A nested query is a query that contains a 
+sub query.
+A sub query is a query within a query.
+
+The top level query may be a select or
+an update or a delete statement.
+The sub queries can only be select statements.
+
+System solves the nested query in sequence
+innermost sub query to the top level query.
+Every sub query returns its results to the
+enclosing outer query.
+User gets result from the top level query only.
+
+==========================================
+The sub query may return one value or a 
+set of values.
+
+
+A) Basic Comparison Operator in Nested Queries
+
+When the sub query returns a single value
+then its result can be compared with a column 
+value using basic comparison operators 
+(=, !=, <>, <, <=, > , >=)
+
+example
+---------
+Q) find the highest paid employees
+SOl)
+* highest paid emp has sal = max (sal)
+* so one sql to fetch max(esal)
+* and one sql to fetch employee with esal =
+result of above sql.
+
+select * from emp where esal = 
+(
+  select max(esal) from emp
+)
+
+-------------------------------------------
+B) "IN" Comparison Operator in Nested Queries
+
+When the sub query returns multiple values
+then its results can be compared with a column 
+value using IN operator.
+i.e.
+select .... where col IN (set of values)
+
+IN operator compares for equality of the
+column value with any value in the set.
+If match is found result is true otherwise
+false.
+
+example
+---------
+Q) find the employees getting salary equal
+to the salary of peons.
+
+SOl)
+* emp has sal = sal of peon
+* so one sql to fetch sal of peons
+* and one sql to fetch employee with esal =
+result of above sql.
+
+select * from emp where esal IN
+(
+select esal from emp where ejob = 'peon'
+)
+
+-------------------------------------------
+C) "NOT IN" Comparison Operator in Nested Queries
+
+When the sub query returns multiple values
+then its results can be compared with a column 
+value using NOT IN operator.
+i.e.
+select .... where col NOT IN (set of values)
+
+NOT IN operator compares for inequality of the
+column value with all values in the set.
+If equality is found result is false otherwise
+true.
+
+example
+---------
+Q) find the employees getting salary not equal
+to the salary of clerks.
+
+SOl)
+* emp has sal not = sal of clerks
+* so one sql to fetch sal of clerks
+* and one sql to fetch employee with esal not =
+result of above sql.
+
+select * from emp where esal NOT IN
+(
+select esal from emp where ejob = 'clerk'
+)
+
+-------------------------------------------
+D) "ANY" Comparison Operator in Nested Queries
+
+ANY comparison operator is used along with
+the basic comparison operators
+(=, !=, <>, <, <=, > , >=).
+
+By the use of ANY operator the basic comparison 
+operators may be used to compare a column
+value with multiple values returned by a 
+sub query.
+
+i.e.
+select .... where col > ANY (set of values)
+
+The column value is compared with the set
+of values. If the comparison is true for any
+value in the set the result is true otherwise
+the result is false.
+
+example
+---------
+to fetch employees earning more than any clerk
+
+select * from emp where esal > ANY
+(
+ select esal from emp where ejob = 'clerk'
+);
+
+
+-------------------------------------------
+E) "ALL" Comparison Operator in Nested Queries
+
+ALL comparison operator is used along with
+the basic comparison operators
+(=, !=, <>, <, <=, > , >=).
+
+By the use of ALL the basic comparison 
+operators may be used to compare a column
+value with multiple values returned by a 
+sub query.
+
+i.e.
+select .... where col > ALL (set of values)
+
+The column value is compared with the set
+of values. If the comparison is true for all
+values in the set then result is true otherwise
+the result is false.
+
+example
+---------
+Q) find the employees getting salary more
+than salary of vijay.
+
+SOl)
+* emp has sal > sal of vijay
+* so one sql to fetch sal of vijay
+* and one sql to fetch employee with esal > ALL
+results of above sql.
+
+select * from emp where esal > ALL
+(
+select esal from emp
+where ename = 'vijay'
+)
+
+=======================================
+find second highest paid employee
+
+select  * from emp where esal = 
+(
+ select max(esal) from emp where esal <> 
+ (
+  select max(esal) from emp
+ )
+);
+
+--------------------------------------------
+find employees working in pune
+
+data is to come from emp table.
+condition to be applied on col dloc of dept table
+the two tables are related via dno
+emp(dno) = dept(dno)
+
+one sql to fetch dno from dept where dloc = pune
+one sql to fetch employees from emp where dno = dno of abv sql
+
+
+sql> select * from emp where dno in
+     (
+       select dno from dept 
+       where dloc = 'pune'
+     );
+
+--------------------------------------------
+find max salary of sales dept
+
+data is to come from emp table.
+condition to be applied on col dname of dept table
+the two tables are related via dno
+emp(dno) = dept(dno)
+
+one sql to find dno from dept where dname = 'sales'
+one sql to fetch max(esal) from emp where dno IN result of abv sql
+
+sql>select max(esal) from emp
+    where dno in
+    (
+      select dno from dept where
+      dname = 'sales'
+    );
+
+--------------------------------------------
+find employees who work in the same dept
+as vijay works.
+
+data is to come from emp table.
+condition to be applied on col dno of emp table
+
+one sql to find dno where ename = 'vijay'
+one sql to fetch emp where dno IN result of abv sql
+
+sql>select * from emp
+    where dno IN
+    (
+       select dno from emp 
+       where ename = 'vijay'
+    );
+
+--------------------------------------------
+show the clerks of sales dept
+
+data is to come from emp table.
+1 condition to be applied on ejob = clerk
+2 condition to be applied on dname of dept table
+the two tables are related via dno
+emp(dno) = dept(dno)
+
+one sql to find dno from dept where dname = 'sales'
+one sql to fetch emp where dno IN result of abv sql
+and ejob = 'clerk'
+
+sql> select * from emp where ejob = 'clerk'
+     and dno in
+     (
+       select dno from dept where
+       dname = 'sales'
+     );
+
+--------------------------------------------
+find max paid clerk of sales dept
+
+ANALYSIS == ?
+
+sql> select * from emp where esal =
+     (
+        select max(esal) from emp
+        where ejob = 'clerk' and dno in
+        (
+           select dno from dept where dname = 'sales'
+        )
+     )
+     and ejob = 'clerk'
+     and dno in
+     (
+        select dno from dept where dname= 'sales'
+     );
+
+----------------------------------------------
+find clerks earning less than peons
+
+one sql to fetch salaries of peons
+one sql to fetch emp where esal < result of abv sql
+and ejob = clerk
+
+select * from emp where esal < ANY
+(
+ select esal from emp where ejob = 'peon'
+)
+and ejob = 'clerk';
+
+---------------------------------------------
+show the managers working in pune
+
+show employees where
+ 1) ejob = 'manager'
+ 2) dno = dno of dept where dloc = pune
+
+select * from emp 
+where ejob = 'manager'
+and dno in
+(
+ select dno from dept where dloc = 'pune'
+);
+
+---------------------------------------------
+show vijays managers
+
+show employees where
+1) ejob = 'manager'
+2) dno = dno of vijay
+
+select * from emp
+where ejob = 'manager'
+and dno in
+(
+ select dno from emp 
+ where ename = 'vijay'
+);
+-----------------------------------
+show highest earning clerks and managers
+
+show employees with
+1) job = manager and sal = max sal for managers
+2) job = clerk and sal = max sal for clerks
+
+select * from emp
+where ejob = 'manager'
+and esal =
+( 
+  select max(esal) from emp where ejob = 'manager'
+)
+or
+ejob = 'clerk'
+and esal =
+(
+  select max(esal) from emp where ejob = 'clerk'
+);
+
+-------------------------------------------------
+find peons earning less than avg salaray for peons
+
+show employees where
+1) ejob = 'peon'
+2) esal < avg esal for peons
+
+select * from emp
+where ejob = 'peon'
+and esal <
+(
+select avg(esal) from emp
+where ejob = 'peon'
+);
+

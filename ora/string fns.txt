@@ -1,0 +1,304 @@
+String functions
+===============
+
+
+1) Upper
+returns the string in uppercase
+
+SQL> select upper('heLlo') from dual;
+UPPER
+-----
+HELLO
+
+2) lower 
+returns the string in lower case
+
+SQL> select lower('HeLLo') from dual;
+LOWER
+-----
+hello
+
+3) initcap
+returns the string in title case
+
+SQL> select initcap('heLLo worLd') from dual;
+INITCAP('HE
+-----------
+Hello World
+
+query: set all emp names to title case
+sql> update emp set ename = initcap(ename) ;
+
+4) length 
+returns length of string
+
+SQL> select length('ant hill') from dual;
+LENGTH('ANT HILL')
+-----------------
+                8
+
+display all employees having password < 6 chars
+SQL> select * from emp where 
+length(password) < 6;
+
+display employee with longest name
+sql> select * from emp where
+     length(ename) =
+     (
+       select max(length(ename)) from emp
+     );
+
+5) substr  : extracts a part of string 
+
+substr(string, start index, length)
+substr(string, start index)
+(1 based index)
+(negative  1 based index runs from R2L)
+(length cannot be negative)
+
+SQL> select substr('computer', 2,4) from dual;
+SUBS
+----
+ompu
+
+SQL> select substr('computer', 2, 100) from dual;
+SUBSTR(
+-------
+omputer
+
+SQL> select substr('computer', 100, 10) from dual;
+S
+-
+<null is returned>
+
+SQL> select substr('computer', -3, 5) from dual;
+SUB
+---
+ter
+5 characters from third last character
+
+SQL> select substr('computer', -5,3) from dual;
+SUB
+---
+put
+3 characters from fifth last char
+
+SQL> select substr('computer', 5,-2) from dual;
+S
+-
+<null is returned>
+
+SQL> select substr('computer', 5) from dual;
+SUBS
+----
+uter
+
+SQL> select substr('computer', -5) from dual;
+SUBST
+-----
+puter
+
+SQL> select substr('computer',3,0)
+from dual;
+S
+-
+
+<null is returned>
+-------------------------------------------------------
+6) ltrim
+removes a subset of string from left
+
+SQL> select ltrim('abcdef', 'abc') from dual;
+LTR
+---
+def
+
+SQL> select ltrim('abcdef', 'abd') from dual;
+LTRI
+----
+cdef
+
+
+-------------------------------------------------------
+7) rtrim
+removes a subset of string from right
+
+SQL> select rtrim('abcdef', 'def') from dual;
+RTR
+---
+abc
+
+SQL> select rtrim('abcdef', 'cef') from dual;
+RTRI
+----
+abcd
+
+--------------------------------------------------------
+8) lpad : pads the string from left and makes
+it equal to given length
+
+SQL> select lpad('comp', 10, '*') from dual;
+LPAD('COMP
+----------
+******comp
+
+SQL> select lpad('computer', 5, '*') from dual;
+LPAD(
+-----
+compu
+-------------------------------------------------------
+9) rpad : pads the string from right and makes
+it equal to given length
+
+SQL> select rpad('comp', 10, '@') from dual;
+RPAD('COMP
+----------
+comp@@@@@@
+
+SQL> select rpad('computer', 5, '*') from dual;
+RPAD(
+-----
+compu
+-------------------------------------------------------
+10) instr
+Returns the starting position of string within another string.
+
+Syntax
+INSTR(string,search)
+INSTR(string,search,pos)
+INSTR(string,search,pos,n)
+
+Arguments
+string : The string to be searched
+search : The search string
+pos : Start position of search
+n : Finds the nth occurrence
+
+Example
+
+SQL> select instr('computer', 'p') from dual;
+
+INSTR('COMPUTER','P')
+---------------------
+                    4
+
+SQL> select instr('computer', 'put') from dual;
+
+INSTR('COMPUTER','PUT')
+-----------------------
+                      4
+
+SQL> select instr('computer', 'pat') from dual;
+
+INSTR('COMPUTER','PAT')
+-----------------------
+                      0   (not found)
+
+SQL> select instr('elephant', 'e') from dual;
+
+INSTR('ELEPHANT','E')
+---------------------
+                    1
+
+SQL> select instr('elephant', 'e', 2) from dual;
+//here 2 is the search start index
+
+INSTR('ELEPHANT','E',2)
+-----------------------
+                      3
+
+SQL> select instr('elephant', 'e', 1, 2) from dual;
+//here 1 is search start index
+//and 2 is second occurrence
+
+INSTR('ELEPHANT','E',1,2)
+-------------------------
+                        3
+
+SQL> select instr('elephant', 'e', 1, 4) from dual;
+
+INSTR('ELEPHANT','E',1,4)
+-------------------------
+                        0  (not found)
+
+show employees having '_' in their email id
+sql> select * from emp where instr(email,'_', 1, 2) > 0;
+
+-------------------------------------------------------
+11) TRANSLATE
+The TRANSLATE function searches 
+through a string for a character, 
+and replaces it with another.
+
+Syntax
+TRANSLATE(string,what,with)
+
+Arguments
+string : The string you wish to modify
+what : Searches for this character
+with : Replaces with this character
+
+Example
+SELECT TRANSLATE('hekko','k','l') from dual 
+
+ hello
+
+SELECT TRANSLATE('gekko','gk','hl') from dual;
+
+hello
+
+looks for character 'g' and if found then 
+replaces with character 'h'
+next it looks for character 'k' and if 
+found then replaces with character 'l'
+
+-------------------------------------------------------
+12) REPLACE
+The REPLACE function searches 
+through a string for another string 
+and replaces all occurrences of it with
+another string
+
+Syntax
+REPLACE(string,search,replace)
+REPLACE(string,search)
+Arguments
+string The string you wish to modify
+search Searches for this string
+replace Replaces with this string. 
+If replace is omitted then search 
+is removed from string
+
+Example
+SELECT REPLACE('orafred','fred','cle') from dual
+
+oracle
+
+SELECT REPLACE('oracleab','ab')  from dual
+
+oracle
+
+-------------------------------------------------------
+13) REVERSE
+The REVERSE function returns the
+reversed value of a string.
+
+Syntax
+REVERSE(string)
+
+Example
+SQL> select reverse('computer') from dual;
+
+REVERSE(
+--------
+retupmoc
+
+find employees with palindrome NAMES
+
+sql> select * from emp
+     where eno in
+     (
+         select eno from emp
+         where ename = reverse(ename)
+     );
+

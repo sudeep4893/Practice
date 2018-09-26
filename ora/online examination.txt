@@ -1,0 +1,95 @@
+Online Examination System
+
+Rough Draft
+-----------
+Student (sid, sname, saddress, sphone)
+Semester (semId, semName)
+Branch (brId, brName)
+ 
+Question Bank 
+  Subject (subId, subName)
+  Chapter (chId, chName, chWtg)
+  Questions (qid, question, op1, op2, op3, op4, ans)
+
+Normalized tables
+----------------
+Student (sid, sname, saddress, sphone)
+Semester (semId, semName)
+Branch (brId, brName)
+
+We need to relate the above tables so
+that collective information can be obtained
+
+1 branch has many semesters
+1 semester has many branches
+so two table have many to many relationship
+plus
+1 student has 1 branch
+1 branch has many students
+
+student table add branch id
+plus
+1 student has 1 sem
+1 sem has many students
+
+student table add sem id
+
+Student (sid, sname, saddress, sphone, brId , semId)
+           1     aaa      pune    123       1   , 1
+           2     bbb      pune    231       1   , 1
+           3     ccc      pune    234       1   , 1
+           4     aaa      pune    123       1   , 2
+           5     bbb      pune    231       1   , 2
+           6     ccc      pune    234       1   , 2
+
+here we see redundancy of sname, saddress, sphone
+so separate them
+
+Student (sid, sname, saddress, sphone)
+           1     aaa      pune    123   
+           2     bbb      pune    231   
+           3     ccc      pune    234    
+
+Admission
+aid  sid brId semId   yr 
+1      1     1      1   2013
+2      2     1      1  
+3      3     1      1
+4      1     1      2   2014
+
+Subject (subId, subName)
+
+Chapter (chId, chName, chWtg)
+
+1 Subject has many chapters
+1 chapter has 1 subject
+
+so the two table have 1 to many relationship
+wrt subject to chapters
+
+so subjectid must be introduced as FK into
+chapter
+
+Subject (subId, subName)
+           1       oracle
+           2       VB 
+
+Chapter (chId, chName, chWtg, sid)
+            1     joins      10       1
+            2     nQry      9        1
+            3     ADODB   10       2 
+
+Questions (qid, question, op1, op2, op3, op4, ans)
+
+Relate Chapter and Questions
+1 chapter has many questions
+1 question hasl 1 chapter
+so they have 1 to many relationship 
+wrt 1 chapter many questions
+
+so add chId as FK in qid
+
+Questions (qid, question, op1, op2, op3, op4, ans, chid)
+
+
+

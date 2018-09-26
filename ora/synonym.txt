@@ -1,0 +1,25 @@
+A synonym is an alternate name for an object 
+(table, view, sequence, ...) in the database.
+
+syntax
+ create synonym <alternate name>
+ for <object>;
+
+SQL> create synonym employee for emp;
+
+The above command creates a private synonym 
+for table emp.
+Hereafter table emp can be accessed by name 
+emp or by name employee.
+
+But the current synonym is a private synonym 
+and can be used by the current user only.
+
+To define a public synonym 
+syntax
+ create public synonym <alternate name>
+ for <object>;
+
+The above command creates a public synonym 
+that can be used by all the users having 
+privilage to access the object.

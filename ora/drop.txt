@@ -1,0 +1,13 @@
+drop statement
+---------------
+Is used to drop (permenantly remove)
+an object (table,view, ...) from database.
+
+syntax
+sql> drop <objecttype> <objectName>;
+
+examples
+sql> drop table employee;
+sql> drop function getMaxSal;
+
+The affect of drop is irreversible.

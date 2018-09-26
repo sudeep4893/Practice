@@ -1,0 +1,239 @@
+Everyone has data to store.
+It is important to store the data in such a way
+that it becomes easy and efficient to
+fetch it back and to manipulate it.
+
+A database is a collection of information.
+
+DBMS (Database management system) is a 
+software tool that is used for efficient
+management of data.
+
+A DBMS may store data in tables (relation)
+and hence may be called as RDBMS.
+
+A table (relation) is defined as a collection of
+homogenous records (rows/tuples).
+
+A record (row/tuple) is a collection of hetrogenous
+fields (columns/attributes).
+---------------------------------------------
+
+As we analyze a real life system we end up in a 
+collection of entities.
+Every entity has its set of attributes.
+Finally the real life system is represented as a 
+complex dataset containing many entities and
+their attributes.
+
+Such datasets have anomalies and must be normalized.
+
+Normalization is the process of dividing a complex
+dataset into multiple smaller managable datasets.
+
+Normalization is generally done upto 3 levels.
+These 3 levels are 3 normal forms.
+
+First Normal Form (FNF)
+----------------------
+a) Every table must have a primary key.
+( Primary key is a column value of which 
+is unique and is not missing for any row.)
+
+b) Table must not have multivalued columns.
+Example
+--------
+
+Person
+------
+pid    pname    page     phobbies
+1       aaa       20      carft, drawing, ...
+2       bbb       21      driving, drawing 
+3       ccc       22       ... 
+
+The column phobbies of table person is multivalued.
+It must be eleminated.
+
+Solution
+--------
+Person
+------
+pid    pname    page     
+1       aaa       20      
+2       bbb       21      
+3       ccc       22      
+
+Hobby
+------
+hid    hname
+1      craft  
+2      drawing
+3      cooking
+
+The tables that are separated must be linked so
+that collective information is accessible.
+It can be understood that 
+1 person can have Many hobbies
+AND
+1 hobby can be of Many people.
+We conclude that the two tables have
+MANY to MANY relationship.
+
+PersonHobby
+------------
+phid   pid  hid
+1       1    1 
+2       1    2
+3       1    3 
+4       2    2
+5       2    3
+
+c) Table must not have repeating groups.
+Repeating groups are columns that store same type
+of information for a record.
+
+Example
+--------
+Student
+--------
+sid    sname    course1   course2
+1       aaa         C         Ora
+2       bbb         C++
+3       ccc         Java
+
+The columns course1 and course2 of table student
+are repeating groups.
+They must be eleminated.
+
+Solution
+--------
+Student
+--------
+sid    sname    
+1       aaa     
+2       bbb     
+3       ccc     
+
+Course
+-------
+cid   cname
+1      C
+2      C++
+3      Oracle
+4      Java
+
+The tables that are separated must be linked so
+that collective information is accessible.
+It can be understood that 
+1 student can have Many courses
+AND
+1 course can be done by Many students.
+We conclude that the two tables have
+MANY to MANY relationship.
+
+StudentCourse
+--------------
+scid   sid  cid
+1       1    1 
+2       1    2
+3       1    3 
+4       2    2
+5       2    3
+===================================
+
+Second Normal Form (SNF)
+----------------------
+a) table must be in FNF
+b) Every column of the table must have functional dependency on PK.
+i.e. The columns of the table that are not functionally dependent on the PK must be eleminated. 
+
+Non functionally dependent cols create redundancy.
+
+employee
+----------
+eid   ename   eaddress  department 
+1      aaa       qwe      sales        
+2      bbb       asd      sales        
+3      ccc       zxc      purchase
+4      ddd       dfg      sales
+
+In the above table (employee) the  column 
+(department) doesnot have functional 
+dependency on PK (eid)
+It must be eleminated.
+
+employee
+----------
+eid   ename   eaddress   did
+1      aaa       qwe        1
+2      bbb       asd        1
+3      ccc       zxc        2
+4      ddd       dfg        1
+
+department
+----------
+did   dname          
+1      sales           
+2      purchase
+3      production
+
+The tables that are separated must be linked so
+that collective information is accessible.
+It can be understood that 
+1 employee can be in 1 department
+AND
+1 department can have Many employees.
+
+We conclude that the two tables have
+1 to MANY relationship.
+So set the PK of department table as
+FK of employee table
+
+===================================
+Third Normal Form (TNF)
+----------------------
+a) table must be in SNF
+b) The columns of the table that are transitively dependent on the PK must be eleminated. 
+
+
+employee
+----------
+eid   ename   eaddress  esal   etax
+1      aaa       qwe      100     10
+2      bbb       asd      200     25
+3      ccc       zxc      300     40 
+
+In the above table (employee) the  column 
+(etax) has functional dependency on column (esal)
+and not the PK (eid)
+i.e. the column (etax) has transitive dependency on
+PK (eid)
+It must be eleminated.
+
+employee
+----------
+eid   ename   eaddress   pid
+1      aaa       qwe        1
+2      bbb       asd        2 
+3      ccc       zxc         3 
+
+package
+----------
+pid   sal   tax
+1     100    10
+2     200    25 
+3     300    40
+
+The tables that are separated must be linked so
+that collective information is accessible.
+It can be understood that 
+1 employee can have 1 package
+AND
+1 package can be of Many employees.
+
+We conclude that the two tables have
+1 to MANY relationship.
+
+So set the PK of package table as
+FK of employee table
+

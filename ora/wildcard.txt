@@ -1,0 +1,50 @@
+Wildcard characters
+-------------------
+
+Oracle supports use of wildcard character
+for pattern formation.
+Next the patterns can be compared with column
+values.
+
+This allows generic filteration/selection of
+records.
+
+For pattern matching one must apply "like"
+or "not like" operators in the where clause
+of select statement.
+
+"=", "<>", "in", "not in" operators are for
+precise match and must be avoided in case
+of pattern match.
+
+The two supported wildcard characters are
+1) _ : matches with any one character
+2) % : matches with zero to many characters
+
+Examples
+---------
+show employees with name starting with letter 'a'
+sql> select * from emp where ename like 'a%';
+
+show employees with name ending with letter 'c'
+sql> select * from emp where ename like '%c';
+
+show employees having letter 'c' in their name
+sql> select * from emp where ename like '%c%';
+
+show employees having 4 letter name
+sql> select * from emp where ename like '____'; (4 underscores)
+
+show employees having 4 or more letters in name
+sql> select * from emp where ename like '____%'; (4 underscores and a %)
+
+show employees having less than 4 letters in name
+sql> select * from emp where ename not like '____%'; (4 underscores and a %)
+
+(NOTE THAT PATTERN MATCHING CAN
+BE APPLIED IN NUMERIC FIELDS ALSO)
+
+show employees having '1' in eno
+sql> select * from emp where eno like '%1%'; 
+
+

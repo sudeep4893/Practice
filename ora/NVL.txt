@@ -1,0 +1,17 @@
+NVL()
+-------
+NVL simply puts a value where a NULL would
+otherwise appear.
+NVL can be used with date, character, varchar2,
+and number datatypes
+
+NVL takes two parameters:-
+* the column you are checking for NULL
+* the value you wish NVL to return if the first
+parameter is NULL
+
+Examples
+
+sql> select NVL(ename, 'NO NAME') from emp;
+sql> select ename, NVL(esal, 0) from emp;
+sql> select count(nvl(esal,0)) from emp;

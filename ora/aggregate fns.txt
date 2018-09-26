@@ -1,0 +1,41 @@
+Aggregate Functions
+------------------------------------------
+min(col) : returns the minimum value for the
+column across all records. NULL values are
+ignored.
+
+example : to get minimum sal of emp table
+sql> select min(esal) from emp;
+-----------------------------------------
+
+max(col) : returns the maximum value for the
+column across all records. NULL values are
+ignored.
+
+example : to get maximum sal of emp table
+sql> select max(esal) from emp;
+-----------------------------------------
+
+avg(col) : returns the average value for the
+column across all records. NULL values are
+ignored.
+
+example : to get avg sal of emp table
+sql> select avg(esal) from emp;
+-----------------------------------------
+
+sum(col) : returns the sum of values for the
+column across all records. NULL values are
+ignored.
+
+example : to get total sal of emp table
+sql> select sum(esal) from emp;
+-----------------------------------------
+
+count(col) : returns the count of values for 
+the column across all records. NULL values 
+are ignored.
+
+example : to get number of employees
+sql> select count(eno) from emp;
+-----------------------------------------

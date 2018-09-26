@@ -1,0 +1,160 @@
+TO_CHAR
+----------
+The TO_CHAR function is used convert 
+a value into a char, with or without a 
+specified format.
+
+Syntax
+TO_CHAR(number)
+TO_CHAR(number,format)
+TO_CHAR(date)
+TO_CHAR(date,format)
+
+Arguments
+number : The number you want to convert to a char
+date    : The date you want to convert to a char
+format : The format mask you wish to apply to the resulting char. 
+            Many format masks are available.
+
+Common Format Masks
+====================================================
+Date Format Masks
+
+Format Mask 	Meaning
+
+YYYY,YYY,YY,Y 	Displays year in 4, 3, 2 or 1 digits
+
+RR 		Returns a year according to the last two digits of the current year
+
+MON,MONTH,MM 	3 digit spelled month, full month spelling or 2 digit month number
+
+Q 		Quarter of year
+
+DY,DAY,DDD,DD,D 	3 letter spelled day, fully spelled day, day of year, day of month, day of week
+
+WW,W 		Week of year, week of the month
+====================================================
+
+SQL> select to_char(sysdate, 'yyyy') from dual;
+TO_C
+----
+2013
+
+SQL> select to_char(sysdate, 'month') from dual;
+TO_CHAR(S
+---------
+august
+
+SQL> select to_char(sysdate, 'day') from dual;
+TO_CHAR(S
+---------
+monday
+
+SQL> select to_char(sysdate, 'w') from dual;
+T
+-
+4
+
+SQL> select to_char(sysdate, 'DDD') from dual;
+
+TO_
+----
+238
+(day of the year)
+
+SQL> select substr(to_char(sysdate), 4, 3) from dual;
+
+SUB
+---
+AUG
+
+and so on try all format masks
+====================================================
+Time Format Mask
+
+Format Mask 	Meaning
+HH,HH12,HH24 	Hour of day, Hours 1-12 or Hours 1-24
+MI 		Minute
+SS 		Second
+SSSS 		Seconds since current hour
+SSSSS 		Seconds since midnight
+====================================================
+SQL> select to_char(sysdate, 'hh24') from dual;
+TO
+--
+20
+
+SQL> select to_char(sysdate, 'mi') from dual;
+TO
+--
+13
+
+SQL> select to_char(sysdate, 'sssss') from dual;
+TO_CH
+-----
+72847
+
+and so o try all format masks
+====================================================
+Number Format Masks
+
+Format Mask 	Meaning
+9 		Numeric position, number of 9’s determine width
+0 		Same as 9 except leading 0’s are displayed
+$ 		Floating dollar sign
+. 		Decimal point position specified
+
+====================================================
+display emp salaraies in format $00000.00
+sql> select to_char(esal, '$00000.00') from emp;
+Result :
+ $01700.00
+ $03000.00
+ $10100.00
+ ....
+
+##### will be shown for rows in which
+salary val is wider than the format width
+
+====================================================
+
+TO_NUMBER
+
+The TO_NUMBER function is used convert 
+a char into a number.
+
+Syntax
+TO_NUMBER(string)
+
+Example
+SQL> select to_number('234.56') from dual;
+TO_NUMBER('234.56')
+-------------------
+             234.56
+====================================================
+TO_DATE
+
+The TO_DATE function is used convert 
+a char into a date.
+
+Syntax
+TO_DATE(string)
+for such a conversion date must be in
+'dd-mon-yyyy' format.
+
+But if our date string is in another format
+then default conversion (as abv) will fail
+and hence we must use 
+
+TO_DATE(string,format)
+
+example
+SQL> select to_date('01/10/2013', 'mm/dd/yyyy') from dual;
+TO_DATE('
+---------
+10-JAN-13
+
+SQL> select to_date('01/10/2012', 'dd/mm/yyyy') from dual;
+TO_DATE('
+---------
+01-OCT-12

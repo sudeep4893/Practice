@@ -1,0 +1,44 @@
+Work more on this
+-----------------
+
+Mobile : (brand, model, IMEI, price, accessories, screenSize, OS, processor, internalMem, externalMem, sim1, sim2, batteryMAPG, camera1, camer2, bluetooth, wifi, screenType, mobileForm )
+
+Mobile : mId, bid, model, price, screenSize, osId, processor, internalMem, externalMem, sim1, sim2, batteryMAPG, camera1, camer2, bluetooth, wifi, screenType, mobileForm
+          1 , 1, Canvas4, 999, 4 ,  1, 
+          2 , 1, abc, 888, 5,  1, 4
+          3 , 1, pqr, 777, 3, 
+          4 , 2, xyz, 789,5,
+          2 , 2, Note2, 999, 6,
+ 
+OS
+osiD, osName, osVersion
+1      Andriod   4.1
+2      Bada       1
+3      Symbian   1
+4     Andriod    2.3
+
+
+Accessories
+-----------
+aid, aname
+1 , earphone
+2 , charger
+3 , screen gaurd
+4 , data cable
+5 , external case
+
+MobileAccessories
+-----------------
+maId, miD, aiD
+1       1     1
+2       1     2 
+3       1     3 
+4       2     1
+5       2     2
+
+Brand  (bid, Bname) 
+          1    Micromax  
+          2    Samsung
+  
+Handset : hid, IMEI, miD
+            1     1234  1

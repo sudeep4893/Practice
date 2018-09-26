@@ -1,0 +1,104 @@
+Alter Table to modify table structure
+==================================
+
+Case 1 : Modify Column Datatype/SIZE
+-----------------------------------
+
+Syntax
+alter table <tableName>
+modify <colName> <colType>;
+ 
+a) Increase  columns width
+
+SQL> alter table emp1
+          modify ename varchar(20);
+
+b) Decrease columns width
+Note : The new value must be large enough to hold all existing data
+
+SQL> alter table emp1
+          modify ename varchar(8);
+
+c) Change the data type
+Note : Column to be modified 
+* must be empty to change datatype
+* must have datatype compatible to new target datatype
+
+SQL> update emp1 set ename = null;
+SQL> alter table emp1
+          modify ename number;
+
+SQL> alter table emp1
+          modify ejob char(12);
+
+
+Case 2 : Add a column
+----------------------
+
+Syntax
+alter table <tableName>
+add <newColName> <colType> [constraint];
+
+SQL> alter table emp1
+          add dob date;  
+
+//will work only if the table is empty
+SQL> alter table emp1
+          add dob date not null;  
+
+Note : The newly added column will store null
+for all the existing rows of the table.
+
+If we wish to add a 'not null' constraint to the
+newly added column then table must be empty.
+
+An alternate idea can be
+* add the column without non null constraint
+* fill the data in the col for all rows 
+* alter the table to set the not null constraint
+
+Case 3 : Remove a column
+-------------------------
+
+Syntax
+alter table <tableName>
+drop column <colName>;
+
+SQL> alter table emp1
+          drop column dob;
+
+Note : The data of column being removed will be lost.
+
+
+Case 4 : Add a column constraint
+-----------------------------
+
+Syntax
+alter table <tableName>
+add constraint <constraintName> <constraint>;
+
+SQL> alter table emp1
+       add constraint emp1PK primary key(eno);
+
+Note : The data of column must not violate constraint rules.
+
+
+Case 5 : Remove a column constraint
+---------------------------------
+
+Note: Name of the constraint must be known
+
+Syntax
+alter table <tableName>
+drop constraint <constraintName>;
+
+SQL> alter table emp1
+          drop constraint emp1PK;
+
+In case we dont know the name of a constraint
+then we can fetch the same from the system
+table : USER_CONSTRAINTS
+
+SQL> select CONSTRAINT_NAME from
+          USER_CONSTRAINTS where
+          TABLE_NAME = 'EMP1';

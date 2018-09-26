@@ -1,0 +1,67 @@
+A Cursor is a work area in memory
+which a DBMS (Oracle) uses for 
+execution of SQL  statements.
+
+For a query (select), the area in 
+memory also includes column headings 
+and rows retrieved by the query.
+
+Cursor can be of 2 types
+1) Implicit
+2) Explicit
+
+Implicit cursors are managed (Opened/
+Fetched/Closed) by the system.
+It has a default name "SQL".
+
+Any SQL statement written in a 
+PLSQL  block forms an "implicit cursor".
+
+
+Explicit cursors are managed  (Opened/
+Fetched/Closed) by plsql code.
+
+An explicit cursor is defined using a 
+select sql statement.
+
+Being explict the cursor is 
+Opened/ Fetched/Closed by code
+and its data processed as per 
+application logic.
+---------------------------------
+                 Cursor Attributes
+
+There are 4 cursor attributes
+that can be used to check the
+state of the cursor (implicit/explicit)
+
+1) %ISOPEN
+     Returns true if cursor is open, otherwise false
+2) %FOUND
+     Returns true if record is fetched  successfully, otherwise false
+3) %NOTFOUND
+     Returns true if record is not fetched  successfully, otherwise false
+4) %ROWCOUNT
+     Returns the number of records fetched from the cursor 	
+
+---------------------------------------------------------------------
+parameterized cursor 
+
+A parameterized cursor is the one that
+accepts parameters and uses them in its
+SQL.
+
+Parameters are passed while opening the cursor.
+
+---------------------------------------------------------------------
+cursor for loop
+
+A cursor for loop is a special loop designed to
+parse cursors.
+It automatically opens, fetchs and closes the
+cursor.
+The loop variable is automatically defined with
+%ROWTYPE.
+
+A variable with %ROWTYPE can be used to
+hold entire row.

@@ -1,0 +1,208 @@
+ Numeric Functions
+--------------------------------------------------------
+1) sqrt : calculates square root
+
+sql> select sqrt(25) from dual;
+  SQRT(25)
+----------
+         5
+sql> select sqrt(25.34) from dual;
+SQRT(25.34)
+-----------------
+ 5.03388518
+sql> select sqrt(-25) from dual;
+select sqrt(-25) from dual
+            *
+ERROR at line 1:
+ORA-01428: argument '-25' is out of range
+
+sql>  select sqrt(0) from dual;
+   SQRT(0)
+----------
+         0
+----------------------------------------------------
+2) abs : returns absolute val of a number
+SQL> select abs(-10) from dual;
+
+  ABS(-10)
+----------
+        10
+
+SQL> select abs(-9.33) from dual;
+ABS(-9.33)
+----------
+      9.33
+
+SQL> select abs(10) from dual;
+   ABS(10)
+----------
+        10
+-----------------------------------------------------
+3) round : rounds a number
+SQL> select round(10.568, 2) from dual;
+ROUND(10.568,2)
+---------------
+          10.57
+
+SQL> select round(167.567, 0) from dual;
+ROUND(167.567,0)
+----------------
+             168
+
+SQL> select round(167.567, -1) from dual;
+ROUND(167.567,-1)
+-----------------
+              170
+
+SQL> select round(161.567, -1) from dual;
+ROUND(161.567,-1)
+-----------------
+              160
+
+SQL> select round(161.567, -2) from dual;
+ROUND(161.567,-2)
+-----------------
+              200
+
+-------------------------------------------------
+power : cal x ^ y
+SQL> select power(5,2) from dual;
+POWER(5,2)
+----------
+        25
+
+SQL> select power(5, 2.1) from dual;
+POWER(5,2.1)
+------------
+  29.3654736
+
+SQL> select power(5, -2) from dual;
+POWER(5,-2)
+-----------
+        .04
+
+SQL> select power(25, -2) from dual;
+POWER(25,-2)
+------------
+       .0016
+
+SQL> select power(25, 0.5) from dual;
+POWER(25,0.5)
+-------------
+            5
+---------------------------------------------------------
+4) TRUNC
+
+The TRUNC function truncates a number to a
+specified number of decimal places.
+
+Syntax
+TRUNC(number,n)
+
+Arguments
+number The number you want to truncate
+n The number of decimal places
+
+Example
+SQL> select trunc(125.257,2) from dual;
+
+TRUNC(125.257,2)
+----------------
+          125.25
+
+SQL> select trunc(125.257,0) from dual;
+
+TRUNC(125.257,0)
+----------------
+             125
+
+SQL> select trunc(125.257,-1) from dual;
+
+TRUNC(125.257,-1)
+-----------------
+              120
+
+SQL> select trunc(125.257,-2) from dual;
+
+TRUNC(125.257,-2)
+-----------------
+              100
+
+-------------------------------------------------------
+
+5) SIGN
+The SIGN function 
+returns 
+-1 if a number is negative, 
+0 if a number is zero 
+1 if a number is positive.
+
+Syntax
+SIGN(number)
+
+Example
+SQL> select sign(0), sign(4), sign(-4) from dual;
+
+   SIGN(0)    SIGN(4)   SIGN(-4)
+---------- ---------- ----------
+         0          1         -1
+
+----------------------------------------------------
+
+6) CEIL 
+The CEIL accepts a number (a double value)
+and returns the next integer value that is
+larger than the input number. 
+
+Example
+
+SQL> select ceil(10.25) from dual;
+CEIL(10.25) 
+-----------
+         11    
+
+SQL> select ceil(-10.25) from dual;
+CEIL(10.25) 
+-----------
+         -10    
+
+----------------------------------------------
+
+7) FLOOR
+The FLOOR accepts a number (a double value)
+and returns the an integer value that is
+smaller than the input number. 
+
+Example
+
+SQL> select floor(10.25) from dual;
+FLOOR(10.25) 
+-----------
+         10    
+
+SQL> select floor(-10.25) from dual;
+FLOOR(10.25) 
+-----------
+         -11
+
+----------------------------------------------------
+8) mod (divident, divisor)
+fetch the remainder of integer division
+
+SQL> select mod(10,7) from dual;
+
+ MOD(10,7)
+----------
+         3
+
+SQL> select mod(10,7.3) from dual;
+
+MOD(10,7.3)
+-----------
+        2.7
+
+SQL> select mod(251.55, 4.5) from dual;
+
+MOD(251.55,4.5)
+---------------
+           4.05

@@ -1,0 +1,171 @@
+Set Operators
+--------------
+Set Operators can be applied on output of
+multiple select statements to form a result set.
+
+It is essential that the multiple select statements
+must fetch data that is columnwise same in
+* COUNT
+* DATA TYPE
+* SEQUENCE
+
+SQL suports following Set Operators
+* UNION
+* INTERSECT
+* MINUS
+* UNION ALL
+
+-------------------------------------
+UNION : UNION set operation acts on output
+of multiple select statements and forms a 
+result set that contains "unique records" from
+the two sets.
+
+syntax:
+    select  statement
+       UNION
+    select statement;
+
+example:
+    select eno from emp
+       UNION
+    select dno from dept;
+
+-------------------------------------
+INTERSECT : INTERSECT set operation acts 
+on output of multiple select statements and 
+forms a result set that contains "common records" 
+from the two sets.
+
+syntax:
+    select  statement
+       INTERSECT
+    select statement;
+
+example:
+    select eno from emp
+       INTERSECT
+    select dno from dept;
+
+-------------------------------------
+MINUS : MINUS set operation acts on output 
+of multiple select statements and forms a 
+result set that contains "records of set1 not
+in set2".
+
+syntax:
+    select  statement
+       MINUS
+    select statement;
+
+example:
+    select eno from emp
+       MINUS
+    select dno from dept;
+-------------------------------------
+UNION ALL : UNION ALL set operation acts 
+on output of multiple select statements and 
+forms a result set that contains "all records" 
+from the two sets.
+
+syntax:
+    select  statement
+       UNION ALL
+    select statement;
+
+example:
+    select eno from emp
+       UNION ALL
+    select dno from dept;
+
+==========================================
+
+create table cricket
+as
+select eno, ename from emp
+where esal >
+(
+  select avg(esal) from emp
+);
+
+create table football
+as
+select eno, ename from emp
+where ejob in ('manager', 'clerk');
+
+
+Q) show employees who play cricket and football.
+sql> select * from emp
+     where eno in
+     (
+       select eno from cricket
+       INTERSECT
+       select eno from football 
+     );
+
+Q) show employees who play cricket only.
+sql> select * from emp
+     where eno in
+     (
+       select eno from cricket
+       MINUS
+       select eno from football
+     );
+
+
+Q) show highest earning football player.
+sql> select * from emp
+     where esal = 
+     (
+       select max(esal) from emp
+       where eno in
+       (
+         select eno from football
+       )
+     )
+     and
+     eno in
+     (
+       select eno from football
+     );
+
+
+Q) show employees who donot play any game.
+sql> select * from emp
+     where eno not in
+     (
+       select eno from cricket
+       UNION 
+       select eno from football
+     );
+
+Q) Show employees who play one game.
+sql> select * from emp
+     where eno not in
+     (
+       select eno from football
+       INTERSECT
+       select eno from cricket
+     )
+     AND
+     eno in
+     (
+       select eno from football
+       UNION
+       select eno from cricket
+     );
+
+Q) show footballers who earn more than ANY cricketers
+
+sql>select * from emp
+    where eno in 
+    (
+     select eno from football
+    )
+    and esal > ANY
+    (
+     select esal from emp where eno in
+     (
+       select eno from cricket
+     )
+    );

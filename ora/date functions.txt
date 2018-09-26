@@ -1,0 +1,206 @@
+Date functions
+-----------------------------------------------
+
+1) MONTHS_BETWEEN
+
+This function returns the number of months
+between two dates. The non-integer part of the
+result represents a portion of a month.
+
+Syntax
+MONTHS_BETWEEN(date1,date2)
+
+Example
+SQL> select months_between('12-OCT-2013', sysdate)
+       from dual;
+
+MONTHS_BETWEEN('12-OCT-2013',SYSDATE)
+-------------------------------------
+                           1.52190898
+
+-----------------------------------------------
+2) ADD_MONTHS
+This function adds a specified number of 
+months to a date.
+
+Syntax
+ADD_MONTHS(date,mon)
+Arguments
+date : The date you are adding to
+mon : The number of months (a whole number) to add. 
+        mon can be negative
+
+Example
+SQL> select ADD_MONTHS(sysdate, 1) from dual;
+
+ADD_MONTH
+---------
+26-SEP-13
+
+SQL> select ADD_MONTHS('12-DEC-2014', 1) from dual;
+
+ADD_MONTH
+---------
+12-JAN-15
+
+SQL> select add_months('31-Jan-2013', -1)
+  2  from dual;
+
+ADD_MONTH
+---------
+31-DEC-12
+
+-----------------------------------------------
+3) NEXT_DAY
+The NEXT_DAY function is used to find 
+the next date of the specified day 
+after a specified date.
+
+Syntax
+NEXT_DAY(date,day)
+
+Arguments
+date : The starting date
+day  : A string representing the  day you are looking for, 
+i.e. Monday, Tuesday, etc.
+Can also be given as a number 
+where 1 is Sunday and 7 is Saturday.
+
+Example
+
+SQL> select next_day(sysdate, 'WED') from dual;
+NEXT_DAY(
+---------
+28-AUG-13
+
+SQL> select next_day(sysdate, 'WEDNESDAY') from dual;
+
+NEXT_DAY(
+---------
+28-AUG-13
+
+SQL> select next_day(sysdate, 'MONDAY') from dual;
+
+NEXT_DAY(
+---------
+02-SEP-13
+
+SQL> select next_day(sysdate, 1) from dual;
+
+NEXT_DAY(
+---------
+01-SEP-13
+
+SQL> select next_day(sysdate, 23) from dual;
+select next_day(sysdate, 23) from dual
+                         *
+ERROR at line 1:
+ORA-01846: not a valid day of the week
+
+-----------------------------------------------
+4) LAST_DAY
+The LAST_DAY function is used to find 
+the last day of the month of a specified 
+date.
+
+Syntax
+LAST_DAY(date)
+
+Example
+SQL> select last_day(sysdate) from dual;
+
+LAST_DAY(
+---------
+31-AUG-13
+
+SQL> select last_day('12-FEB-2016') from dual;
+
+LAST_DAY(
+---------
+29-FEB-16
+
+-----------------------------------------------
+5) ROUND 
+The ROUND function is used to round 
+dates to the nearest month or year.
+
+Syntax
+ROUND(date)
+ROUND(date,what)
+
+Arguments
+date : The date to be rounded
+what : Can either be MONTH or YEAR 
+if omitted then day is rounded
+
+Example
+
+SQL> select round(sysdate) from dual;
+
+ROUND(SYS
+---------
+27-AUG-13
+
+27 because more than half day has passed
+
+SQL> select round(sysdate, 'MON') from dual;
+or
+SQL> select round(sysdate, 'MONTH') from dual;
+or
+SQL> select round(sysdate, 'MM') from dual;
+
+ROUND(SYS
+---------
+01-SEP-13
+
+sep because more than half month has passed
+
+
+SQL> select round(sysdate, 'YEAR') from dual;
+or
+SQL> select round(sysdate, 'YYYY') from dual;
+
+ROUND(SYS
+---------
+01-JAN-14
+
+14 because more than half year has passed
+
+-----------------------------------------------
+6) TRUNC
+Very similar to the ROUND function, 
+but TRUNC effectively always 
+rounds down.
+
+SQL> select trunc(sysdate) from dual;
+
+TRUNC(SYS
+---------
+26-AUG-13
+
+SQL> select trunc(sysdate, 'MONTH') from dual;
+
+TRUNC(SYS
+---------
+01-AUG-13
+
+SQL> select trunc(sysdate, 'YEAR') from dual;
+
+TRUNC(SYS
+---------
+01-JAN-13
+
+-----------------------------------------------
+
+Day(date)
+Month(date)
+Year(date)
+
+These functions are used to fetch
+the day, month and year respectively
+from the given date.
+
+These functions are supported by all
+database systems other than Oracle
+
+-----------------------------------------------

@@ -1,0 +1,42 @@
+Packages
+
+A package is a collection of logically related 
+PLSQL blocks, procedures, functions and variables. 
+
+A package consists of  
+1) package specification 
+2) package body. 
+
+The package specification defines the interface 
+(signatures) that are usable for application programmers.
+
+The package body implements the package specification .
+
+Syntax
+
+Create or replace package <packName> as
+  function declaration
+  procedure declaration
+  ...
+end <packName>;
+/
+
+create or replace package body <packName> as
+
+  function definition
+
+  procedure definition
+
+  ....
+end <packName>;    
+/
+
+Using a package 
+packName.fnname;
+
+Imp:
+If any object(function, cursor, etc) is defined
+in package body only and not declared in the
+package specification then that object is termed
+as local / private to the package and cannot
+be used outside the package.

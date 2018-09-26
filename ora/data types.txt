@@ -1,0 +1,30 @@
+Oracle offers the following basic data types:
+ 
+char(n): Fixed-length character data (string), n characters long. 
+The maximum size for n is 2000. 
+Note that a string of type char is always padded on
+right with blanks to full length of n. 
+
+varchar2(n): Variable-length character string. The maximum size for n is 4000. 
+Only the bytes used for a string require storage.
+
+number(o,d) : Numeric data type for integers and reals. 
+o = overall number of digits
+d = number of digits to the right of the decimal point.
+
+Examples: number(8), number(5,2)
+Note that, e.g., number(5,2) can 
+contain anything upto 999.99 
+without resulting in an error. 
+
+Data types derived from number are int[eger], dec[imal], smallint and real.
+
+date: Date data type for storing date and time.
+The default format for a date is: DD-MMM-YY. Examples: '13-OCT-11', '07-JAN-13'
+
+long: Character data up to a length of 2GB. 
+Only one long column is allowed per table.
+
+Note: In Oracle-SQL there is no data type 
+boolean. It can, however, be simulated 
+by using either char(1) or number(1).

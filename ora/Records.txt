@@ -1,0 +1,106 @@
+PLSQL RECORDS
+----------------
+
+A PL/SQL record is a data structure that can hold 
+data items of different kinds. 
+Records consist of different fields, similar to a row 
+of a database table.
+
+PL/SQL can handle the following types of records:
+ 
+* Table-based records
+* Cursor-based records
+* User-defined records
+
+ 
+Table-Based Records
+--------------------- 
+The %ROWTYPE attribute enables a programmer 
+to create table-based and cursor-based records.
+ 
+The following example would illustrate the concept
+of table-based records. 
+
+DECLARE
+   emp_rec emp%rowtype;
+BEGIN
+   SELECT * into emp_rec
+   FROM emp
+   WHERE eno = 5;
+
+   dbms_output.put_line('no : ' || emp_rec.eno);
+   dbms_output.put_line('name : ' || emp_rec.ename);
+   dbms_output.put_line('salary: ' || emp_rec.esal);
+   dbms_output.put_line('job: ' || emp_rec.ejob);
+   dbms_output.put_line('dno: ' || emp_rec.dno);
+END;
+/ 
+
+Cursor-Based Records
+--------------------
+The following example would illustrate the concept of cursor-based records.
+ DECLARE
+   CURSOR C is
+      SELECT eno, ename 
+      FROM emp;
+
+  emp_rec C%rowtype;
+BEGIN
+   OPEN C;
+   LOOP
+      FETCH C into emp_rec;
+      EXIT WHEN C%notfound;
+      DBMS_OUTPUT.put_line(emp_rec.eno || ' ' || emp_rec.ename);
+   END LOOP;
+   close C;
+END;
+/ 
+
+User-Defined Records
+--------------------
+ 
+PL/SQL provides a user-defined record type that 
+allows you to define different record structures. 
+Records consist of different fields. 
+
+Syntax 
+
+TYPE type_name IS RECORD
+  ( field_name1  datatype1  [NOT NULL]  [:= DEFAULT EXPRESSION],
+   field_name2   datatype2   [NOT NULL]  [:= DEFAULT EXPRESSION],
+   ...
+   field_nameN  datatypeN  [NOT NULL]  [:= DEFAULT EXPRESSION
+);
+record-name  type_name; 
+
+Accessing Fields
+--------------- 
+To access any field of a record, we use the dot (.) operator. 
+The member access operator is coded as a period 
+between the record variable name and the field that 
+we wish to access. 
+
+
+Example
+
+DECLARE
+TYPE book IS RECORD
+(
+    title  varchar(50),
+    author  varchar(50),
+    subject varchar(100)
+);
+b1 book;
+
+BEGIN
+   -- Book 1 specification
+   b1.title  := 'C Programming';
+   b1.author := 'XYZ'; 
+   b1.subject := 'C Programming Tutorial';
+
+   -- Print book 1 record
+   dbms_output.put_line('Book 1 title : '|| b1.title);
+   dbms_output.put_line('Book 1 author : '|| b1.author);
+   dbms_output.put_line('Book 1 subject : '|| b1.subject);
+END;
+/

@@ -1,0 +1,87 @@
+Dynamic SQL supports composition and execution 
+of SQL statements at runtime.
+
+Dynamic SQL statements are not embedded in your
+source program; rather, they are stored in character 
+strings that are input to, or built by, the program 
+at runtime. 
+
+For example, dynamic SQL lets you create a procedure
+that operates on a table whose name is not known 
+until runtime.
+
+Following methods of DBMS_SQL package are used 
+to implement Dynamic SQL in PLSQL.
+
+OPEN_CURSOR
+---------------
+To process a SQL statement, you must have an 
+open cursor.  When you call the OPEN_CURSOR 
+Function, you receive a cursor ID for the data 
+structure that represents a valid cursor maintained
+by Oracle. 
+
+
+PARSE
+-------
+Every SQL statement must be parsed by calling the
+PARSE Procedure. Parsing the statement checks the 
+statement's syntax and associates it with the cursor 
+in your program.
+You can parse any DML or DDL statement. 
+DDL statements are run on the parse, which performs 
+the implied commit.
+
+BIND_VARIABLE
+----------------
+Many DML statements require that data in your 
+program be input to Oracle. When you define a 
+SQL statement that contains input data to be 
+supplied at runtime, you must use placeholders in 
+the SQL statement to mark where data must be 
+supplied.
+
+For each placeholder in the SQL statement, you 
+must call the BIND_VARIABLE Procedure,to supply
+the value of a variable in your program to the 
+placeholder. 
+
+When the SQL statement is subsequently run, 
+Oracle uses the data that your program has placed 
+in the bind variables.
+
+
+DEFINE_COLUMN 
+-----------------
+The columns of the row being selected in a SELECT 
+statement are identified by their relative positions 
+as they appear in the select list,  from left to right. 
+For a query, you must call DEFINE_COLUMN to specify 
+the variables that are to receive the SELECT values, 
+much the way an INTO clause does for a static query.
+
+
+EXECUTE
+----------
+Call the EXECUTE function to run your SQL statement.
+
+
+FETCH_ROWS 
+-------------
+The FETCH_ROWS function retrieves the rows that 
+satisfy the query. 
+
+COLUMN_VALUE
+----------------
+For queries (select statement), call COLUMN_VALUE 
+to determine the value of a column retrieved by the 
+FETCH_ROWS call. 
+
+CLOSE_CURSOR
+----------------
+When you no longer need a cursor for a session, 
+close the cursor by calling CLOSE_CURSOR. 
+
+If you neglect to close a cursor, then the memory 
+used by that cursor remains allocated even though 
+it is no longer needed.
