@@ -1,0 +1,116 @@
+STL
+Standard Template Library
+
+STL provides general-purpose, template classes
+and functions that implement many popular and 
+commonly used algorithms and data structures.
+
+Three core items of the  STL are 
+1) containers
+2) algorithms 
+3) iterators
+
+Containers are objects that hold other objects.
+Examples of Containers are
+Stack, Queue, Vectors, Deque, List, Map, etc
+
+Algorithms are template functions that act on 
+containers. 
+They provide support for initialization, sorting, 
+searching, and transforming the contents of 
+containers.
+
+Iterators are objects that act like pointers. 
+They give you the ability to cycle through the 
+contents of a container.
+-------------------------------------------------------
+List of some popular containers
+-------------------------------------
+
+Container  : deque
+Description : A double-ended queue.
+Required Header : <deque>
+
+Container  : list
+Description : A linear list.
+Required Header : <list>
+
+Container  : map
+Description : Stores key/value pairs in which each key is associated with only one value.
+Required Header : <map>
+
+Container  : multimap
+Description : Stores key/value pairs in which one key may be associated with two or more values.
+Required Header : <map>
+
+Container  : multiset
+Description : A set in which each element is not necessarily unique.
+Required Header : <set>
+
+Container  : priority_queue 
+Description : A priority queue. 
+Required Header : <queue>
+
+Container : queue 
+Description : A  queue. 
+Required Header : <queue>
+
+Container : set 
+Description : A set in which each element is unique. 
+Required Header : <set>
+
+Container : stack 
+Description : A stack. 
+Required Header : <stack>
+
+Container : vector 
+Description : A dynamic array. 
+Required Header : <vector>
+
+-----------------------------------------------------------
+List of Algorithms
+-----------------------
+
+binary_search 
+	Performs a binary search on an ordered sequence.
+copy 
+	Copies a sequence.
+count 
+	Returns the number of elements in the sequence.
+equal 
+	Determines if two ranges are the same.
+fill  
+	Fills a range with the specified value.
+find 
+	Searches a range for a value and returns an iterator to the first occurrence of the element.
+for_each 
+	Applies a function to a range of elements.
+max 
+	Returns the maximum of two values.
+merge 
+	Merges two ordered sequences, placing the result into a third sequence.
+min 
+	Returns the minimum of two values.
+remove
+	Removes elements from a specified range.
+replace
+	Replaces elements within a range.
+reverse 
+	Reverses the order of a range.
+search 
+	Searches for subsequence within a sequence.
+set_difference 
+	Produces a sequence that contains the difference between two ordered sets.
+set_intersection 
+	Produces a sequence that contains the intersection of the two ordered sets.
+set_symmetric_difference 
+	Produces a sequence that contains the symmetric difference between the two ordered sets.
+set_union 
+	Produces a sequence that contains the union of the two ordered sets.
+sort 
+	Sorts a range.
+swap 
+	Exchanges two values.
+transform 
+	Applies a function to a range of elements and stores the outcome in a new sequence.
+

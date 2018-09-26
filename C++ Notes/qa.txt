@@ -1,0 +1,42 @@
+Q) what is the difference between
+a struct and a class?
+
+A)In C a struct is a group of variables only.
+It defines a new secondary datatype.
+
+In C++ a class is a group of variables 
+and functions.
+It defines a new secondary datatype.
+Defining a class is implementing encapsulation.
+
+-------------------------------------------------
+
+Q) what is the difference between
+a struct of C++ and a class of C++?
+
+A) In C++ a struct and a class are
+all similar (both are group of variables
+and functions) and can be used interchangably.
+
+Only one difference between the two
+is that members of a struct are "public"
+by default and members of a class are
+"private" by default.
+
+-------------------------------------------------
+what is a constructor?
+
+A constructor is a special member
+function used for initialization of
+an object on creation.
+
+-------------------------------------------------
+
+what is Constructor Overloading?
+
+Constructor Overloading means 
+defining mutliple constructors 
+for a class with different set of
+parameters.
+
+-------------------------------------------------

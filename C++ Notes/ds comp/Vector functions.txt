@@ -1,0 +1,41 @@
+Common Member Functions for Vector
+
+reference back( );
+	Returns a reference to the last element in the vector.
+
+iterator begin( );
+	Returns an iterator to the first element in the vector.
+
+void clear( ); 
+	Removes all elements from the vector.
+
+bool empty( ); 
+	Returns true if the invoking vector is empty and false otherwise.
+
+iterator end( );
+	Returns an iterator to the end of the vector.
+
+iterator erase(iterator i); 
+	Removes the element pointed to by i.
+	Returns an iterator to the element after the one removed.
+
+reference front( );
+	Returns a reference to the first element in the vector.
+
+iterator insert(iterator i, val);
+	Inserts val immediately before the element specified by i. 
+	An iterator to the element is returned.
+
+void pop_back( ); 
+	Removes the last element in the vector.
+
+void push_back(val); 
+	Adds an element with the value specified by val to the end of the vector.
+size( ) 
+	Returns the number of elements currently in the vector.
+
+The following comparison operators are defined for vector:
+==, <, <=, !=, >, >=
+The subscripting operator [ ] is also defined for
+vector. This allows array like access of the elements 
+of a  vector

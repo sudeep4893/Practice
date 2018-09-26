@@ -1,0 +1,104 @@
+OOP is a programming pattern in which
+we implement 
+* Encapsulation
+* Polymorphism
+* Inheritance 
+* Abstraction
+==========================================
+Encapsulation
+
+All OOP languages support encapsulation
+i.e. support definition of new 
+secondary datatypes that are formed 
+by combining variables and functions. 
+
+C++ supports definition of structs
+and classes for implementation of
+encapsulation.
+
+example:
+
+class ICard
+{
+  name
+  address
+  picture
+  phone number
+  year
+  branch
+  college
+
+  openDoor(){}
+  markAttendance(){}
+};
+
+
+The variables and functions that 
+define a class are called as 
+"members" of the class.
+
+Particularly variables that belong
+to a class are called as "member variables".
+
+And functions that belong to a class
+are called as "member functions".
+
+Q) How to use a class?
+A) Recollect that a defined class is 
+   a secondary datatype.
+   Recollect that to use a datatype
+   we create its variables.
+   Example
+   int = 99; //illegal
+   int i; //create a variable
+   i = 99; //legal
+
+   Similarly to use a class we create
+   "objects" of the class.
+
+Q) What is an object?
+A) Object is a software entity that
+   can store and process data.
+
+Q) How to create an object?
+A) As we create variables of primary
+   datatypes similarly we create objects
+   of secondary datatypes.
+   Example:
+   int i; //i is variable of type int
+   Clock c;//c is object of class Clock 
+
+Q) Describe more about object?
+A) Object is an entity that can store
+   and process data.
+
+   Storage capacity of an object is 
+   equal to storage capacity of non static
+   member variables of the class.
+
+   Processing capacity of an object is 
+   equal to processing capacity of 
+   member functions of the class.
+
+   Infact to access members of a class
+   we need object of the class.
+   Example:
+
+   class Clock
+   {
+ 	int h, m, s;
+	void setTime(){}
+	void dispTime(){}
+   };
+
+   Clock c;//object of class Clock
+
+   to access member variable : h
+   	c.h
+   to access member function : setTime
+   	c.setTime()
+
+      
+ 
+
+

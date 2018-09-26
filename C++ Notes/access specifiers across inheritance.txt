@@ -1,0 +1,28 @@
+About use of access specifiers while inheritance
+
+Known that while inheriting a class we apply
+some access specifier.
+
+class Derived : <access specifier> Base
+{}
+
+Possible access specifiers are
+1) private (default)
+2) protected
+3) public
+
+Due to private access specifier while inheritance
+protected and public members of base class become 
+private members of the derived class. 
+
+Due to protected access specifier while inheritance
+protected and public members of base class become 
+protected members of the derived class. 
+
+Due to public access specifier while inheritance
+protected and public members of base class 
+remain protected and public members respectively
+in the derived class. 
+
+private members of base class are not accessible 
+to the derived class.

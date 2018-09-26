@@ -1,0 +1,28 @@
+Object Oriented programming (OOP) 
+is a programming pattern that represents 
+concepts as "objects" that have data 
+fields (properties that describe the object) 
+and associated methods (functions that 
+represent the operations of object).  
+
+OOP design implements
+
+Encapsulation
+A language construct that facilitates the 
+binding of code and data in one unit.
+ 
+Polymorphism 
+Is the ability to define an operation that 
+has more than one forms i.e. can be
+implemented in multiple ways to yield the
+same result. 
+
+Inheritance
+is a way to build extended objects
+from existing objects.
+
+Data Abstraction 
+is the process by which data and programs
+are defined with a representation similar 
+in form to its meaning, while hiding away 
+the implementation  details.
