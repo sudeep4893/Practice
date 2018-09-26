@@ -1,0 +1,16 @@
+Expression Conversion from Postfix to Prefix
+
+1) U need a Operand stack
+2) Read and process the entire postfix expression
+3) detect incoming element is operator or operand
+4) for operands, push in operand stack
+5) for operators, pop out 2 operands
+first val is opnd2
+second val is opnd1
+Result is 
+   "opOpnd1Opnd2"
+Push back the result into operand stack
+
+6) after expression traversal is complete
+stack contains a single val that is the
+prefix of postfix. Pop it out and return it.

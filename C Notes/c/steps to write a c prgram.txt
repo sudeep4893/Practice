@@ -1,0 +1,21 @@
+steps to write a C program
+
+1) include header files
+
+All functions of the header files get
+imported into current program. Then
+the functions can be readily used.
+
+2) Define main() function 
+
+OS starts program execution with main().
+All the instructions inside main() will get
+executed sequentially.
+As code (instructions) of main() get over
+program execution stops.
+
+Hence said main() defines life of a C prg.
+
+
+3) In main or in other functions declare variables, write instructions as per the 
+task of the program.

@@ -1,0 +1,55 @@
+Linear Loops : A simple loop in which change in
+loop controlling factor is due to addition/subtration
+of units.
+Hence efficiency is proportionate to number of
+iterations.
+   f(n) = n
+
+Logarithmic Loops : A  loop in which change in
+loop controlling factor is due to multiplication
+or division.
+Hence number of iterations is a function of
+multiplier or divisor.
+   f(n) = log(n) to the base multiplier or divisor
+
+
+Linear Logarithmic Loops: A nested loop in which
+outer loop is linear and inner loop is logarithmic
+or vice versa.
+Hence number of iterations :
+   f(n) = n* log(n) to the base multiplier or divisor
+
+Dependent Quadaratic : A nested loop in which
+outer loop is linear and inner loop is dependent
+for one of its factors.
+Hence number of iterations :
+   f(n) = n* (n+1)/2
+
+Quadratic : A nested loop in which outer and 
+inner loop runs same (fixed) number of times.
+Hence number of iterations :
+   f(n) = n*n
+
+
+In computer science, the time complexity of 
+an algorithm quantifies the amount of time 
+taken by an algorithm for execution. 
+
+The time complexity of an algorithm is 
+commonly expressed using big O notation, 
+which excludes coefficients and lower order 
+terms. 
+i.e. Big O notation is used in computer algorithms 
+as a worst-case scenario illustration.
+
+
+Linear Loops :  O(n)
+Logarithmic Loops : O(log n)
+Linear Logarithmic Loops : O(nlog(n))
+Quadratic : O(n*n)
+Dependent Quadratic : 
+        n* (n+1)/2
+        n*n/2 +  n*1/2   //ignore constants
+        n*n   +    n	//ignore lower order terms
+        n*n
+        O(n*n)   

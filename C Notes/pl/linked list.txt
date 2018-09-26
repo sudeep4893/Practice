@@ -1,0 +1,54 @@
+                      Linked List
+
+A linked list is a collection of sequentially
+connected nodes.
+
+Where a node is a custom datatype that can store 
+1) data (information) 
+2) address (memory location). 
+
+(see diagram).
+-------------------------------------------------
+              Linked List and Array
+
+In 2 ways a linked list resembles an array
+1) homogenous type
+2) sequential storage pattern
+
+Hence algorithms that work on arrays
+do work on linked lists as well and 
+vice-versa.
+
+Advantages of a linked list over an array
+
+1) Uses dynamic memory management.
+    (allocation and deallocation).
+    It allows runtime expansion and reduction
+    in size of the linked list.
+
+   As compared array size is static prefixed.
+
+2) Nodes can be added/removed from any
+    location (beginning or intermediate or
+    end).
+
+   As compared array doesnt allow addition
+   or removal of elements.
+
+3) Memory (and hence life) of a linked list 
+    is controlled by code.
+  
+   As compared memory of an array is 
+   controlled by the system and is 
+   determined scopewise.
+
+Disadvantages of a linked list as compared
+with an array.
+
+As array elements are known by index so
+a direct access of nth element is possible
+
+Whereas to reach a nth node in a linked
+list we need traversal of n-1 nodes. This
+reduces efficiency.
+-------------------------------------------------

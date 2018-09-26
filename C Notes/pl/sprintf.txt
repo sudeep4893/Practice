@@ -1,0 +1,16 @@
+#include<stdio.h>
+
+//demo of sprintf
+int main()
+{
+    char temp[20];
+    int a = 10;
+    float b = 3.45;
+    char c = 'q';
+    
+    //printf("%d %f %c", a, b, c);
+    sprintf(temp , "%d %f %c", a, b, c);
+    
+    printf("%s", temp);
+    return 0;
+}

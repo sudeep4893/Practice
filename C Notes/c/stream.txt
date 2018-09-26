@@ -1,0 +1,39 @@
+A stream is a channel of data transfer across
+devices.
+A stream can be 
+1) Unidirectional
+    Unidirectional streams allow one way data transfer.
+    examples
+    * Input stream
+    * Output stream  
+     
+2) Bidirectional
+    Bidirectional streams allow two way data transfer.
+    example
+    * Input and Output Stream
+
+
+Streams are owned by the OS.
+OS makes all streams available to the active
+application.
+When our C application will become active then
+it will have access to all streams.
+It is the job of code of C application to utilize the
+available streams.
+
+C provides ready made functions
+like printf, scanf, ... through header files.
+These functions have the ability to use
+avialable streams.
+
+
+printf is a ready made function.
+It comes from header file stdio.h
+printf fetches data from C prg and puts the 
+data into std output stream (stdout) that
+connects CPU and monitor. 
+
+printf can output 3 types of data.
+1) Data stored in variables.
+2) Data enclosed in double quotes.
+3) Cursor movement and special characters.

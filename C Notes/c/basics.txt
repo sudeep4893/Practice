@@ -1,0 +1,63 @@
+What is a computer?
+A computer is a device that can execute programs.
+
+
+What is a program?
+A program is a set of instructions that
+* take input
+* process it
+* generates output
+
+A program is made up of
+1) Code
+Code means instructions.
+Program instructions are grouped together
+and a block of code is formed.
+It is called as a function.
+
+What is a function?
+A function is a block of code.
+It has a unique name, for its identification.
+It is used to process program data.
+
+Functions can be of 2 types.
+1) Predefined Functions
+Predefined functions are functions readily available 
+for use.
+These functions are grouped in a file called as "header file".
+(A header file is a collection of predefined functions)
+
+Users import the header file and directly call (execute)
+the ready made functions defined in the header file.
+
+2) User Defined Functions
+These are defined by the user and then called (executed).
+
+A program must have min. one user defined function, 
+and it is the "main()".
+----------------------------------------------------------------
+2) Data
+Data means information.
+Data can be of two types.
+  a) input
+  b) output
+
+Data (input or output) must be stored in variables.
+
+What is a variable?
+A variable is a block of memory.
+It has a unique name, for its identification.
+It is used to store program data(input/output).
+It can hold only one value at a time.
+Its value can change.
+
+==================================
+
+Q) Explain why code expansion takes place in C?
+A) In a C program we have 2 types of functions
+1) Predefined, that comes from header files we include.
+2) User defined, that we make.
+
+On compilation the system merges our code and the
+code of the included header files, so that target code
+that is generated has the size of both. i.e. is expanded. 

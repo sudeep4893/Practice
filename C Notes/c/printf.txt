@@ -1,0 +1,63 @@
+//here we are importing a header file
+//a header file is a group of ready made
+//functions
+//after import we readily use the functions
+//of the header file in our C program.
+
+#include<stdio.h>
+
+int main()
+{
+    //declare an int variable named i
+    int i; 
+    //assign 10 to it
+    i = 10; 
+    //print it
+    //printf("%d", i); //prints i as decimal
+    //printf("%x", i); //prints i as hexadecimal
+    //printf("%X", i); //prints i as hexadecimal
+    //printf("%o", i); //prints i as octal
+      printf("%i", i); //prints i as integer
+/*    
+    printf("\" \x1 Hello Programming\"");//\" to output "
+    //also
+    // \' to output '
+    // \\ to output \
+    // \? to output ? 
+    // \x<hexDigit> for ASCII characters (0-255 decimal)
+    
+    printf("\n"); //takes cursor to beginning of next line
+    printf("hello X");
+    printf("\b"); //(backspace)takes cursor one position back (leftwards)
+    printf("C");
+    printf("\r"); //(carriage return)takes cursor to the beginning of current line 
+    printf("\a\a\a\a\a\a\a");// alert (bell) using PC Speaker
+  */  
+    return 0;
+}
+/*
+ printf is a predefined function.
+ It comes from header file stdio.h 
+ It takes program data and puts it
+ into standard output stream (stdout)
+ that connects CPU and Monitor.
+ 
+ printf can output 3 types of data.
+ 1) Data enclosed in double quotes.
+ 2) Data stored in variables.
+ 3) Special characters and cursor movement
+ character(using escape sequence character).
+ -----------------------------------------
+ To print data stored in variables we must
+ provide 2 things to printf 
+ 1) Format character of datatype of variable
+ 2) Name of the variable.
+  
+ Datatype               Format Character
+  int                     %d,%o,%x,%X,%i
+  long                    %ld
+  float                   %f      
+  double                  %e,%g       
+  char                    %c
+ 
+ */

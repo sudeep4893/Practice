@@ -1,0 +1,50 @@
+Expression Conversion from infix to postfix
+
+Rules
+1) Know the priorities
+2) U need a Stack
+3) Read and process the entire infix expression
+4) Only operators go into the stack
+    All operands go into the result directly
+5) An operator can be pushed
+    a) in an empty stack
+    b) abv a low priority operator in stack operator
+    c) abv opening bracket in stack
+
+6) If incoming operator priority is
+less or equal to the instack operator
+priority then 
+a) first pop out all the high/equal priority
+operators from stack
+b) place them in result
+c) finally push in the incoming opearator
+
+7) when instack operator is ^ and
+incoming operator is ^ then donot
+compare priorities, push in the incoming
+^ above the instack ^.
+
+8) A closing bracket never goes into the stack
+When it is found the pop out all the operators
+until opening bracket comes out.
+Place the outcoming operators in the result.
+Donot place the opening bracket in result, discard it. 
+ 
+9) When expression traversal is complete
+then pop out all the instack operators
+and place them in result. 
+-------------------------------------
+Postfix Expression Evaluation
+
+1) U need a float stack
+2) Read and process the entire postfix expression
+3) detect incoming element is operator or operand
+4) for operands, scan value and push
+5) for operators, pop out 2 values
+first val is no2
+second val is no1
+process no1 and no2 as per operator
+push in the result
+6) after expression traversal is complete
+stack contains a single val that is the
+ans. Pop it out and return it.
